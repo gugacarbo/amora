@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import Div100vh from "react-div-100vh";
+import styled from "styled-components";
+import Amora1 from "./assets/Amora1.jpeg";
+import Amora2 from "./assets/Amora2.jpeg";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <AppContainer>
+      <Title>Olá eu sou a Amora</Title>
+      <ImageContainer>
+        <img src={Amora2} alt="Amora" />
+      </ImageContainer>
+    </AppContainer>
+  );
 }
 
-export default App
+//const AppContainer = styled(Div100vh)`
+const AppContainer = styled.div`
+  width: 506.25px;
+  height: 900px;
+  background-color: ${({ theme }) => theme.background};
+`;
+
+const ImageContainer = styled.div`
+  width: 50%;
+  background-color: ${({ theme }) => theme.background};
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+const Title = styled.h1`
+  font-size: 2.5rem;
+  color: ${({ theme }) => theme.color.main.color};
+  text-align: center;
+`;
+export default App;
