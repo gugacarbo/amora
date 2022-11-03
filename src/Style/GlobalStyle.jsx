@@ -29,8 +29,10 @@ const GlobalStyle = createGlobalStyle`
         align-items: center;
         height: 100%;
         min-height: 100vh;
-        &::-webkit-scrollbar {
-            width: 8px;
+        *{
+
+            &::-webkit-scrollbar {
+                width: 8px;
             height: 8px;
         }
         &::-webkit-scrollbar-track {
@@ -47,6 +49,7 @@ const GlobalStyle = createGlobalStyle`
         &::-webkit-scrollbar-thumb:active {
             background-color: ${({ theme }) => theme.color.main.darker};
         }
+    }
     }
 `;
 export default GlobalStyle;
