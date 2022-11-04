@@ -12,7 +12,7 @@ import PoppinsThin from "../assets/fonts/Poppins/Poppins-Thin.otf";
 
 import Pacifico from "../assets/fonts/Pacifico/Pacifico.ttf";
 
-import ComfofortaaRegular from "../assets/fonts/Comfortaa/Comfortaa-regular.ttf";
+import ComfofortaaRegular from "../assets/fonts/Comfortaa/Comfortaa-Regular.ttf";
 import ComfortaaLight from "../assets/fonts/Comfortaa/Comfortaa-Light.ttf";
 import ComfortaaBold from "../assets/fonts/Comfortaa/Comfortaa-Bold.ttf";
 
