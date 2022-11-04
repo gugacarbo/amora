@@ -6,6 +6,12 @@ const RaffleContext = createContext({
   checked: [],
   setChecked: () => {},
   EnviarReserva: () => {},
+  clientNumbers: [],
+  setClientNumbers: () => {},
+  clientToken: "",
+  setClientToken: () => {},
+  clientData: {},
+  setClientData: () => {},
 });
 
 export default RaffleContext;

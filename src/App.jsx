@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import Home from "./Routes/Home";
 import Raffle from "./Routes/Raffle";
+import Reserve from "./Routes/Reserve";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/rifa" element={<Raffle />} />
+            <Route path="/rifa/reserva" element={<Reserve />} />
           </Routes>
         </AnimatePresence>
       </Router>

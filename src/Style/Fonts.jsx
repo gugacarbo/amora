@@ -10,6 +10,12 @@ import PoppinsMedium from "../assets/fonts/Poppins/Poppins-Medium.otf";
 import Poppins from "../assets/fonts/Poppins/Poppins-Regular.otf";
 import PoppinsThin from "../assets/fonts/Poppins/Poppins-Thin.otf";
 
+import Pacifico from "../assets/fonts/Pacifico/Pacifico.ttf";
+
+import ComfofortaaRegular from "../assets/fonts/Comfortaa/Comfortaa-regular.ttf";
+import ComfortaaLight from "../assets/fonts/Comfortaa/Comfortaa-Light.ttf";
+import ComfortaaBold from "../assets/fonts/Comfortaa/Comfortaa-Bold.ttf";
+
 const Fonts = createGlobalStyle`
 
     @font-face {
@@ -18,7 +24,7 @@ const Fonts = createGlobalStyle`
         font-weight: normal;
         font-style: normal;
     }
-    
+
     @font-face {
         font-family: 'Gothan';
         src: url(${Gothan}) format('truetype');
@@ -67,6 +73,37 @@ const Fonts = createGlobalStyle`
         font-weight: 100;
         font-style: normal;
     }
+
+    @font-face {
+        font-family: 'Pacifico';
+        src: url(${Pacifico}) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+
+    }
+
+    @font-face {
+        font-family: 'Comfortaa';
+        src: url(${ComfofortaaRegular}) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Comfortaa';
+        src: url(${ComfortaaLight}) format('truetype');
+        font-weight: 200;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Comfortaa';
+        src: url(${ComfortaaBold}) format('truetype');
+        font-weight: bold;
+        font-style: normal;
+    }
+
+
 
 `;
 
