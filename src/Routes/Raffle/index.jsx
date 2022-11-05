@@ -18,7 +18,7 @@ function Raffle() {
     let used = raffleData.number_array[i] ? true : false;
 
     numbers.push(
-      <Number key={i} number={i} used={used} name={raffleData.number_array[i]}>
+      <Number key={i} number={i} used={used} name={raffleData?.number_array[i]?.name}>
         {i}
       </Number>
     );
@@ -146,6 +146,7 @@ const RaffleHeader = styled(motion.div)`
   width: 90%;
   height: 100%;
   display: flex;
+  font-size: 1.1rem;
   justify-content: center;
   align-items: center;
   position: relative;

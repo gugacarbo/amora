@@ -19,7 +19,7 @@ export default {
       light: "#ff9ed3 ",
       complement: "#2ecc71",
       complementLight: "#72EDC8",
-      triad: ["#2EFF19", "#3319FF"],
+      triad: ["#FFF39C", "#69EEFF"],
       shadow: ["#804D00", "#E68A00", "#402600"],
     },
     contrast: "#fefefe",

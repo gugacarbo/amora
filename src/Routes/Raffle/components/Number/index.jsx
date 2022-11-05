@@ -15,7 +15,6 @@ function Number({ children, used, name, ...props }) {
       rotateY: 180,
     },
   };
-
   return (
     <NumberBox
       onClick={() => (!used ? setChecked(children) : removeChecked(children))}
@@ -25,7 +24,7 @@ function Number({ children, used, name, ...props }) {
         animate={checked.includes(children) ? "animate" : "initital"}
         {...props}
         checked={checked.includes(children)}
-        clientChecked={clientNumbers.includes(children)}
+        clientChecked={clientNumbers[children] && clientNumbers[children]}
         whileHover={
           checked.includes(children)
             ? { rotateY: 160, transition: { duration: 0.2 } }
@@ -109,17 +108,25 @@ const NumberContent = styled(motion.div)`
     background-color: ${theme.color.main.complement};
     color: ${theme.color.white};
     `}
-  ${({ theme, clientChecked }) =>
-    clientChecked &&
-    `
-    background-color: ${theme.color.main.color};
-    color: ${theme.color.white};
-    `}
+  ${({ theme, clientChecked }) => {
+    switch (clientChecked) {
+      case 1:
+        return `
+        background-color: ${theme.color.main.triad[0]};
+        color: ${theme.color.darkGray};
+        `;
+      case 2:
+        return `
+          background-color: ${theme.color.main.color};
+          color: ${theme.color.white};
+        `;
+    }
+  }}
 `;
 
 const Name = styled.small`
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 0.2rem;
+  left: 0.2rem;
   font-size: 0.8rem;
 `;
