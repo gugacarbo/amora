@@ -1,55 +1,119 @@
+import { motion } from "framer-motion";
 import { useContext } from "react";
 import styled from "styled-components";
 import RaffleContext from "../../../../context/RaffleContext";
 
 function Number({ children, used, name, ...props }) {
-  const { checked, setChecked, clientNumbers, clientData } =
+  const { checked, setChecked, clientNumbers, clientData, removeChecked } =
     useContext(RaffleContext);
+
+  const Animations = {
+    initial: {
+      rotateY: 0,
+    },
+    animate: {
+      rotateY: 180,
+    },
+  };
+
   return (
     <NumberBox
-      {...props}
-      checked={checked.includes(children)}
-      clientChecked={clientNumbers.includes(children)}
       onClick={() => (!used ? setChecked(children) : removeChecked(children))}
-      used={used}
     >
-      {children}
-      {/* <Name>{clientNumbers.includes(children) ? clientData.name :name}</Name> */}
-      <Name>{name}</Name>
+      <NumberContent
+        variants={Animations}
+        animate={checked.includes(children) ? "animate" : "initital"}
+        {...props}
+        checked={checked.includes(children)}
+        clientChecked={clientNumbers.includes(children)}
+        whileHover={
+          checked.includes(children)
+            ? { rotateY: 160, transition: { duration: 0.2 } }
+            : { rotateY: 20, transition: { duration: 0.2 } }
+        }
+        used={used}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+      >
+        <NumberFront>
+          {children}
+          <Name>{name}</Name>
+        </NumberFront>
+        <NumberBack>{children}</NumberBack>
+      </NumberContent>
     </NumberBox>
   );
 }
 export default Number;
 
-const NumberBox = styled.div`
+const NumberBox = styled(motion.div)`
   width: 100%;
   aspect-ratio: 1/1;
-  background-color: #ddd;
+  position: relative;
+  perspective: 1000px;
   display: flex;
-  border: 1px solid #000;
+  justify-content: center;
+  align-items: center;
+`;
+const NumberFront = styled.div`
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: center;
+  position: absolute;
+  align-items: center;
+`;
+const NumberBack = styled.div`
+  width: 100%;
+  font-size: 1.6rem;
+  font-weight: bold;
+
+  height: 100%;
+  position: absolute;
+
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const NumberContent = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+
+  background-color: ${({ theme }) => theme.color.white};
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  display: flex;
+  border: 1px solid ${({ theme }) => theme.color.mediumGray};
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: ${({ theme }) => theme.transition.main};
-  position: relative;
-  ${({ used }) =>
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-style: preserve-3d;
+  ${({ theme, used }) =>
     used &&
     `
-    background-color: #000;
-    color: #fff;
+    background-color: ${theme.color.mediumGray};
+    color: ${theme.color.gray};
     cursor: default;
+    
     `}
-  ${({ checked }) =>
+  ${({ theme, checked }) =>
     checked &&
     `
-    background-color: #040;
-    color: #fff;
+    background-color: ${theme.color.main.complement};
+    color: ${theme.color.white};
     `}
-  ${({ clientChecked }) =>
+  ${({ theme, clientChecked }) =>
     clientChecked &&
     `
-    background-color: #ff82c3 ;
-    color: #fff;
+    background-color: ${theme.color.main.color};
+    color: ${theme.color.white};
     `}
 `;
 

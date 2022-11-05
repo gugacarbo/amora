@@ -1,5 +1,5 @@
 import api from "../../util/api";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import RaffleContext from "./index";
 
@@ -22,9 +22,11 @@ export default ({ children }) => {
     }
   }
   function removeChecked(number) {
-    if (typeof number === "number" && checked.includes(number)) {
-      setChecked(checked.filter((item) => item !== number));
-    } else {
+    if (typeof number === "number") {
+      if (checked.includes(number)) {
+        setChecked(checked.filter((item) => item !== number));
+      }
+    } else if (Array.isArray(number)) {
       number.forEach((value) => {
         if (checked.includes(value)) {
           setChecked((checked) => checked.filter((item) => item !== value));
@@ -37,7 +39,7 @@ export default ({ children }) => {
   }
 
   const reserveNumbers = (clientData) =>
-  api.post("/reservar.php", {
+    api.post("/reservar.php", {
       ...clientData,
       raffle_id: raffleData.id,
       numbers: checked,
@@ -83,6 +85,9 @@ export default ({ children }) => {
     }
   }, []);
 
+  const openFormButtonRef = useRef(null);
+
+
   return (
     <RaffleContext.Provider
       value={{
@@ -99,6 +104,7 @@ export default ({ children }) => {
         setClientToken: handleClientToken,
         clientData,
         setClientData,
+        openFormButtonRef,
       }}
     >
       {children}

@@ -12,6 +12,7 @@ const RaffleContext = createContext({
   setClientToken: () => {},
   clientData: {},
   setClientData: () => {},
+  openFormButtonRef: {},
 });
 
 export default RaffleContext;
