@@ -6,19 +6,35 @@ import RaffleContext from "../../context/RaffleContext";
 import Form from "./components/Form";
 import Legend from "./components/Legend";
 import Number from "./components/Number";
+import Loading from "../Loading";
 
 function Raffle() {
   const { raffleData, checked, openFormButtonRef } = useContext(RaffleContext);
   const [formModalOpen, setFormModalOpen] = useState(false);
-  if (!raffleData?.name) return <></>;
 
+  if (!raffleData?.name)
+    return (
+      <RaffleContainer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ delay: 0, duration: 0.5 }}
+      >
+        <Loading />
+      </RaffleContainer>
+    );
   var numbers = [];
 
   for (var i = 1; i <= raffleData.number_quantity; i++) {
     let used = raffleData.number_array[i] ? true : false;
 
     numbers.push(
-      <Number key={i} number={i} used={used} name={raffleData?.number_array[i]?.name}>
+      <Number
+        key={i}
+        number={i}
+        used={used}
+        name={raffleData?.number_array[i]?.name}
+      >
         {i}
       </Number>
     );

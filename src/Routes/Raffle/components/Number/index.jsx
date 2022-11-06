@@ -31,7 +31,7 @@ function Number({ children, used, name, ...props }) {
             : { rotateY: 20, transition: { duration: 0.2 } }
         }
         used={used}
-        transition={{ duration: 0.3, ease: "easeOut" }}
+        transition={{ duration: 0.3, ease: "linear" }}
       >
         <NumberFront>
           {children}
@@ -112,8 +112,8 @@ const NumberContent = styled(motion.div)`
     switch (clientChecked) {
       case 1:
         return `
-        background-color: ${theme.color.main.triad[0]};
-        color: ${theme.color.darkGray};
+        background-color: ${theme.color.main.triad[1]};
+        color: ${theme.color.mediumGray};
         `;
       case 2:
         return `

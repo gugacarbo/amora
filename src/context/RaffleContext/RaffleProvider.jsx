@@ -87,6 +87,7 @@ export default ({ children }) => {
 
   const openFormButtonRef = useRef(null);
 
+  const [boughtNumbers, setBoughtNumbers] = useState([3, 2, 40]);
 
   return (
     <RaffleContext.Provider
@@ -105,6 +106,8 @@ export default ({ children }) => {
         clientData,
         setClientData,
         openFormButtonRef,
+        boughtNumbers,
+        setBoughtNumbers,
       }}
     >
       {children}

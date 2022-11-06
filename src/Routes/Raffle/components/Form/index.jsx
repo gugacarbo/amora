@@ -7,6 +7,7 @@ import { useDetectClickOutside } from "react-detect-click-outside";
 import api from "../../../../util/api";
 import RaffleContext from "../../../../context/RaffleContext";
 import { motion } from "framer-motion";
+import Loading from "../../../Loading";
 
 function Form({ open, setOpen }) {
   const [errorMessage, setErrorMessage] = useState("");
@@ -24,6 +25,8 @@ function Form({ open, setOpen }) {
     clientNumbers,
     setClientNumbers,
     openFormButtonRef,
+    boughtNumbers,
+    setBoughtNumbers,
   } = useContext(RaffleContext);
 
   const navigate = useNavigate();
@@ -134,10 +137,9 @@ function Form({ open, setOpen }) {
                   setClientNumbers(response.data.client_numbers);
                   setClientToken(response.data.token);
                   setValues(response.data.client);
-
                   resetChecked();
-
-                  // navigate("/rifa/reserva");
+                  setBoughtNumbers(response.data.numbers);
+                  navigate("/rifa/reserva");
                 } else {
                   if (response?.data?.used) {
                     removeChecked(response.data.used);
@@ -168,62 +170,65 @@ function Form({ open, setOpen }) {
             isSubmitting,
             /* and other goodies */
           }) => (
-            <StyledForm onSubmit={handleSubmit}>
-              <Label>
-                <span>Nome</span>
-                <StyledInput
-                  type="text"
-                  name="name"
-                  placeholder="Digite seu nome"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.name}
-                  error={errors.name && touched.name && errors.name}
-                />
-                <small>{errors.name && touched.name && errors.name}</small>
-              </Label>
-              <Label>
-                <span>CPF</span>
-                <StyledInput
-                  as={InputMask}
-                  mask="999.999.999-99"
-                  alwaysShowMask={false}
-                  type="text"
-                  name="cpf"
-                  placeholder="Digite seu CPF"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.cpf}
-                  error={errors.cpf && touched.cpf && errors.cpf}
-                />
-                <small>{errors.cpf && touched.cpf && errors.cpf}</small>
-              </Label>
-              <Label>
-                <span>Telefone</span>
-                <StyledInput
-                  as={InputMask}
-                  alwaysShowMask={false}
-                  mask="(99) 9.9999-9999"
-                  type="text"
-                  name="phone"
-                  placeholder="Digite seu telefone"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.phone}
-                  error={errors.phone && touched.phone && errors.phone}
-                />
-                <small>{errors.phone && touched.phone && errors.phone}</small>
-              </Label>
+            <>
+              {isSubmitting && <Loading />}
+              <StyledForm onSubmit={handleSubmit}>
+                <Label>
+                  <span>Nome</span>
+                  <StyledInput
+                    type="text"
+                    name="name"
+                    placeholder="Digite seu nome"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.name}
+                    error={errors.name && touched.name && errors.name}
+                  />
+                  <small>{errors.name && touched.name && errors.name}</small>
+                </Label>
+                <Label>
+                  <span>CPF</span>
+                  <StyledInput
+                    as={InputMask}
+                    mask="999.999.999-99"
+                    alwaysShowMask={false}
+                    type="text"
+                    name="cpf"
+                    placeholder="Digite seu CPF"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.cpf}
+                    error={errors.cpf && touched.cpf && errors.cpf}
+                  />
+                  <small>{errors.cpf && touched.cpf && errors.cpf}</small>
+                </Label>
+                <Label>
+                  <span>Telefone</span>
+                  <StyledInput
+                    as={InputMask}
+                    alwaysShowMask={false}
+                    mask="(99) 9.9999-9999"
+                    type="text"
+                    name="phone"
+                    placeholder="Digite seu telefone"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.phone}
+                    error={errors.phone && touched.phone && errors.phone}
+                  />
+                  <small>{errors.phone && touched.phone && errors.phone}</small>
+                </Label>
 
-              {checked.length > 0 && (
-                <Button
-                  onClick={handleSubmit}
-                  disabled={isSubmitting || Object.keys(errors).length > 0}
-                >
-                  Reservar
-                </Button>
-              )}
-            </StyledForm>
+                {checked.length > 0 && (
+                  <Button
+                    onClick={handleSubmit}
+                    disabled={isSubmitting || Object.keys(errors).length > 0}
+                  >
+                    Reservar
+                  </Button>
+                )}
+              </StyledForm>
+            </>
           )}
         </Formik>
       </MotionContainer>

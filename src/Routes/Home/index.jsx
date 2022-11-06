@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import Div100vh from "react-div-100vh";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Image from "./components/Image";
 
 function Home() {
   const navigate = useNavigate();
+
   return (
     <HomeContainer
       initial={{ opacity: 1 }}
@@ -28,8 +29,9 @@ function Home() {
         transition={{ delay: 0.2, duration: 0.5 }}
         exit={{ opacity: 0.13, x: -200 }}
       >
-        <span>Fui abandonada e estou a procura de um lar</span>
-        <span>Você pode me ajudar comprando a minha rifa</span>
+        <span>Au au</span>
+        <span>Meu nome é Amora Jessie e estou à procura de um lar</span>
+        <span>Conto com a sua ajuda!</span>
       </Text>
       <Button
         initial={{ x: "-100vw" }}
@@ -41,15 +43,23 @@ function Home() {
         Rifa
       </Button>
       <Button
-        initial={{ x: "100vw" }}
-        animate={{ x: 0 }}
+        initial={{ x: "300%", opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.5 }}
-        exit={{ x: "100vw" }}
+        exit={{ x: "300%", opacity: 0 }}
         second
         onClick={() => navigate("/rifa")}
       >
         Me dê um lar
       </Button>
+      <LoginButton
+        initial={{ y: "100vh" }}
+        animate={{ y: 0 }}
+        transition={{ delay: 0.6, duration: 0.5 }}
+        exit={{ y: "100vh" }}
+      >
+        <Link to="/rifa/reserva">Ver meus números</Link>
+      </LoginButton>
     </HomeContainer>
   );
 }
@@ -68,6 +78,11 @@ const Text = styled(motion.p)`
   text-align: center;
   padding: 0 1rem;
   font-family: "Poppins";
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const Button = styled(motion.div)`
@@ -108,6 +123,22 @@ const Button = styled(motion.div)`
     `}
 `;
 
+const LoginButton = styled(motion.div)`
+  grid-area: login;
+  a {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: ${({ theme }) => theme.color.main.dark};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ${({ theme }) => theme.transition.main};
+    &:hover {
+      color: ${({ theme }) => theme.color.main.complement};
+    }
+  }
+`;
 const HomeContainer = styled(motion.div)`
   width: 100%;
   height: 100%;
@@ -120,7 +151,7 @@ const HomeContainer = styled(motion.div)`
     "HomeText HomeImage"
     "HomeButton HomeButton"
     "HomeButton2 HomeButton2"
-    " . . ";
+    " login login ";
   place-items: center;
   overflow: hidden;
 `;

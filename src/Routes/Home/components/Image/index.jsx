@@ -28,12 +28,13 @@ const ImageContainer = styled(motion.div)`
   justify-content: center;
   align-items: center;
   margin-left: auto;
-  margin-right: 2rem;
+  margin-right: 3rem;
   svg {
     width: 170%;
     height: 160%;
     position: absolute;
     left: -45%;
+    transform: scale(1.15);
     top: -28%;
     * {
       fill: ${({ theme }) => theme.background};
@@ -44,6 +45,8 @@ const ImageContainer = styled(motion.div)`
     }
   }
   img {
+    transform: scale(1.15);
+
     z-index: 10;
     width: 100%;
     height: 100%;
