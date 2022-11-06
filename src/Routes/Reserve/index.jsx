@@ -15,7 +15,7 @@ function Reserve() {
   const [qrData, setQrData] = useState();
   const { boughtNumbers, raffleData, clientData } = useContext(RaffleContext);
   const horizontalScroll = useHorizontalScroll();
-  
+
   if (!raffleData?.name || !clientData?.name)
     return (
       <ReserveContainer
@@ -37,7 +37,6 @@ function Reserve() {
     clientData.cpf.slice(0, 3) +
     "A" +
     boughtNumbers.sort((a, b) => a - b).join("n");
-  console.log(transactionId);
   const qrCodePix = QrCodePix({
     version: "01",
     key: "03320312090", //or any PIX key
