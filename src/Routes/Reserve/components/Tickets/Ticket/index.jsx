@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { ReactComponent as TicketSvg } from "../../../../assets/Ticket.svg";
+import { ReactComponent as TicketSvg } from "../../../../../assets/Ticket.svg";
 
 function Ticket({ number, text }) {
   const ticketRef = useRef();

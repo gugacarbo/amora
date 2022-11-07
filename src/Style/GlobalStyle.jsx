@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Comfortaa', 'Poppins', sans-serif;
         background-color: ${({ theme }) => theme.color.darkGray};
         color: ${({ theme }) => theme.color.text};
-        overflow-x: hidden;
+        overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;

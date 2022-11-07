@@ -101,7 +101,7 @@ function Raffle() {
         disabled={checked.length === 0}
         initial={{ y: "200%", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0 }}
+        transition={{ delay: 0.4, duration: 0.3 }}
         exit={{ y: "200%", opacity: 0 }}
       >
         Reservar
