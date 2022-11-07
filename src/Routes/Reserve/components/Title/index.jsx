@@ -3,7 +3,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import RaffleContext from "../../../../context/RaffleContext";
 
-export default function Title() {
+ function Title() {
   const { clientData } = useContext(RaffleContext);
 
   return (
@@ -17,6 +17,7 @@ export default function Title() {
     </TitleContainer>
   );
 }
+export default Title;
 
 const TitleContainer = styled(motion.h4)`
   padding: 1rem 0;

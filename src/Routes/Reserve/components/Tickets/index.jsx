@@ -5,7 +5,7 @@ import RaffleContext from "../../../../context/RaffleContext";
 import Ticket from "./Ticket";
 import { useHorizontalScroll } from "../../../../util/hooks";
 
-export default function Tickets() {
+ function Tickets() {
   const { boughtNumbers, raffleData, clientData } = useContext(RaffleContext);
   const horizontalScroll = useHorizontalScroll();
 
@@ -36,6 +36,7 @@ export default function Tickets() {
     </TicketContainer>
   );
 }
+export default Tickets;
 const TicketContainer = styled(motion.div)`
   width: 100%;
   display: flex;

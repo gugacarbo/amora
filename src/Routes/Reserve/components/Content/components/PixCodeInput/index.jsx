@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { ReactComponent as CopySvg } from "../../../../../../assets/copy.svg";
 import { ReactComponent as QRIconSvg } from "../../../../../../assets/QRIcon.svg";
 
-export default function PixCodeInput({ pixCode, setQrOpen }) {
+function PixCodeInput({ pixCode, setQrOpen }) {
   const inputCopyCodeRef = useRef();
 
   return (
@@ -27,10 +27,12 @@ export default function PixCodeInput({ pixCode, setQrOpen }) {
   );
 }
 
+export default  PixCodeInput;
+
 const PixCopyCode = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 
   width: 100%;
   background-color: #fff;
@@ -39,7 +41,6 @@ const PixCopyCode = styled.div`
   border: 1px solid ${({ theme }) => theme.color.main.dark};
   cursor: pointer;
   svg {
-    margin-left: 0.5rem;
     width: 1.4rem;
     height: 1.4rem;
     fill: ${({ theme }) => theme.color.main.dark};
@@ -71,6 +72,10 @@ const QRIcon = styled.div`
   justify-content: center;
   cursor: pointer;
   transition: ${({ theme }) => theme.transition.slow};
+  svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
   &:hover {
     background-color: ${({ theme }) => theme.color.main.light};
     fill: ${({ theme }) => theme.color.white};

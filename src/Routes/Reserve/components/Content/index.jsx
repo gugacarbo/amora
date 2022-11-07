@@ -6,7 +6,7 @@ import RaffleContext from "../../../../context/RaffleContext";
 import { Pix } from "../../../../util/hooks";
 import PixCodeInput from "./components/PixCodeInput";
 
-export default function Content() {
+ function Content() {
   const { boughtNumbers, raffleData, clientData } = useContext(RaffleContext);
   const [qrOpen, setQrOpen] = useState(false);
 
@@ -45,6 +45,7 @@ export default function Content() {
     </ReserveContent>
   );
 }
+export default Content;
 
 const QrContent = styled(motion.div)`
   position: absolute;
@@ -57,6 +58,9 @@ const QrContent = styled(motion.div)`
   align-items: center;
   background-color: ${({ theme }) => theme.color.black + "a2"};
   backdrop-filter: blur(3px);
+  img{
+    width: 60%;
+  }
   ${({ visible }) =>
     visible ? "pointer-events: all;" : "pointer-events: none;"}
 `;

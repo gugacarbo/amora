@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export default function Header() {
+ function Header() {
   return (
     <HeaderContainer
       initial={{ y: "-100%" }}
@@ -14,6 +14,7 @@ export default function Header() {
     </HeaderContainer>
   );
 }
+export default Header;
 
 const HeaderContainer = styled(motion.div)`
   font-size: 2rem;
