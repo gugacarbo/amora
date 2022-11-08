@@ -6,12 +6,15 @@ import RaffleContext from "./index";
 export default ({ children }) => {
   const [raffleData, setRaffleData] = useState({});
   const [checked, setChecked] = useState([]);
-  const [clientNumbers, setClientNumbers] = useState([]);
+  const [clientNumbers, setClientNumbers] = useState({});
 
-  useEffect(() => {
+  function getRifa() {
     api.get("/getRifa.php").then(({ data }) => {
       setRaffleData(data.data);
     });
+  }
+  useEffect(() => {
+    getRifa();
   }, []);
 
   function handleChecked(number) {
@@ -45,7 +48,7 @@ export default ({ children }) => {
       numbers: checked,
     });
 
-  const [clientToken, setClientToken] = useState("");
+  const [clientToken, setClientToken] = useState(null);
   const [clientData, setClientData] = useState(null);
 
   function handleClientToken(token) {
@@ -59,14 +62,25 @@ export default ({ children }) => {
       api
         .get("/getClientNumbers.php?token=" + localToken)
         .then(({ data }) => {
-          setClientNumbers(data.numbers);
-          setClientData(data.client);
-          handleClientToken(localToken);
+          if (data.status >= 200 && data.status < 300) {
+            setClientNumbers(data.numbers);
+            setClientData(data.client);
+            handleClientToken(localToken);
+          } else {
+            handleClientToken("");
+            setClientData({
+              name: "",
+              lastName: "",
+              cpf: "",
+              phone: "",
+            });
+          }
         })
         .catch((err) => {
-          setClientToken("");
+          handleClientToken("");
           setClientData({
             name: "",
+            lastName: "",
             cpf: "",
             phone: "",
           });
@@ -74,6 +88,7 @@ export default ({ children }) => {
     } else {
       setClientData({
         name: "",
+        lastName: "",
         cpf: "",
         phone: "",
       });
@@ -88,7 +103,20 @@ export default ({ children }) => {
   const openFormButtonRef = useRef(null);
 
   const [boughtNumbers, setBoughtNumbers] = useState([3, 2, 40]);
+  function resetClientData() {
+    setClientToken("");
 
+    setClientNumbers({});
+    setBoughtNumbers([]);
+
+    setClientData({
+      name: "",
+      lastName: "",
+      cpf: "",
+      phone: "",
+    });
+    localStorage.removeItem("AmoraToken");
+  }
   return (
     <RaffleContext.Provider
       value={{
@@ -108,6 +136,8 @@ export default ({ children }) => {
         openFormButtonRef,
         boughtNumbers,
         setBoughtNumbers,
+        getRifa,
+        resetClientData,
       }}
     >
       {children}

@@ -1,45 +1,78 @@
 import styled from "styled-components";
 import { useRef } from "react";
-import { ReactComponent as CopySvg } from "../../../../../../assets/copy.svg";
-import { ReactComponent as QRIconSvg } from "../../../../../../assets/QRIcon.svg";
+import { ReactComponent as CopySvg } from "../../../../../../../assets/copy.svg";
+import { ReactComponent as QRIconSvg } from "../../../../../../../assets/QRIcon.svg";
+import { useState } from "react";
 
-function PixCodeInput({ pixCode, setQrOpen }) {
+function PixCodeInput({ pixCode, setShowQr }) {
   const inputCopyCodeRef = useRef();
+  const [copied, setCopied] = useState(0);
 
   return (
-    <PixCopyCode
-      onClick={() => {
-        navigator.clipboard.writeText(pixPayload);
-        inputCopyCodeRef.current.select();
-      }}
-    >
+    <PixCopyCode>
+      <CopyMessage copied={copied}>Copiado</CopyMessage>
       <PixCopyInput
         ref={inputCopyCodeRef}
         type="text"
         value={pixCode}
-        onChange={() => {}}
+        onChange={(e) => false}
+        onClick={() => {
+          navigator.clipboard.writeText(pixCode);
+          inputCopyCodeRef.current.select();
+          setCopied(1);
+          setTimeout(() => {
+            setCopied(0);
+          }, 1000);
+        }}
       />
-      <CopySvg />
-      <QRIcon onClick={() => setQrOpen((open) => !open)}>
+      <CopySvg
+        onClick={() => {
+          navigator.clipboard.writeText(pixCode);
+          inputCopyCodeRef.current.select();
+          setCopied(1);
+          setTimeout(() => {
+            setCopied(0);
+          }, 1000);
+        }}
+      />
+      <QRIcon onClick={() => setShowQr((open) => !open)}>
         <QRIconSvg />
       </QRIcon>
     </PixCopyCode>
   );
 }
 
-export default  PixCodeInput;
-
+export default PixCodeInput;
+const CopyMessage = styled.small`
+  position: absolute;
+  bottom: -110%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Poppins";
+  font-weight: bold;
+  transition: ${({ theme }) => theme.transition.x2};
+  ${({ copied }) =>
+    copied
+      ? `
+      opacity: 1;
+      `
+      : `
+      opacity: 0;
+  `}
+`;
 const PixCopyCode = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
 
-  width: 100%;
+  width: 90%;
   background-color: #fff;
   border-radius: 100px;
   padding: 0.2rem;
   border: 1px solid ${({ theme }) => theme.color.main.dark};
   cursor: pointer;
+  position: relative;
   svg {
     width: 1.4rem;
     height: 1.4rem;
@@ -58,6 +91,11 @@ const PixCopyInput = styled.input`
   background-color: ${({ theme }) => theme.color.white};
   border-radius: 10px;
   outline: none;
+
+  ::selection {
+    background-color: ${({ theme }) => theme.color.main.light};
+    color: #fff;
+  }
   cursor: pointer;
 
   padding: 0.2rem;

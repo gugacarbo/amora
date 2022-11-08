@@ -3,6 +3,8 @@ import { useContext } from "react";
 import styled from "styled-components";
 import RaffleContext from "../../../../context/RaffleContext";
 
+import { ReactComponent as PawSvg } from "../../../../assets/paw.svg";
+
 function Number({ children, used, name, ...props }) {
   const { checked, setChecked, clientNumbers, clientData, removeChecked } =
     useContext(RaffleContext);
@@ -24,34 +26,59 @@ function Number({ children, used, name, ...props }) {
         animate={checked.includes(children) ? "animate" : "initital"}
         {...props}
         checked={checked.includes(children)}
-        clientChecked={clientNumbers[children] && clientNumbers[children]}
-        whileHover={
-          checked.includes(children)
-            ? { rotateY: 160, transition: { duration: 0.2 } }
-            : { rotateY: 20, transition: { duration: 0.2 } }
+        clientChecked={
+          clientNumbers[children] && clientNumbers[children].status
         }
         used={used}
-        transition={{ duration: 0.3, ease: "linear" }}
+        transition={{ duration: 0.5 }}
       >
-        <NumberFront>
+        <NumberFront
+          checked={checked.includes(children)}
+          clientChecked={
+            clientNumbers[children] && clientNumbers[children].status
+          }
+          used={used}
+        >
           {children}
-          <Name>{name}</Name>
+          <Name>
+            {clientNumbers[children] && clientNumbers[children].status
+              ? clientData?.name
+              : name}
+          </Name>
         </NumberFront>
-        <NumberBack>{children}</NumberBack>
+        <NumberBack
+          checked={checked.includes(children)}
+          clientChecked={
+            clientNumbers[children] && clientNumbers[children].status
+          }
+          used={used}
+        >
+          {children}
+          <Name>{clientData?.name}</Name>
+          <PawBackground />
+        </NumberBack>
       </NumberContent>
     </NumberBox>
   );
 }
 export default Number;
 
+const PawBackground = styled(PawSvg)`
+  position: absolute;
+  width: 80%;
+  fill: ${({ theme }) => theme.color.lighterGray};
+  z-index: -1;
+  transform: rotate(-30deg);
+`;
+
 const NumberBox = styled(motion.div)`
   width: 100%;
   aspect-ratio: 1/1;
   position: relative;
-  perspective: 1000px;
   display: flex;
   justify-content: center;
   align-items: center;
+  perspective: 1000px;
 `;
 const NumberFront = styled.div`
   width: 100%;
@@ -62,26 +89,60 @@ const NumberFront = styled.div`
   justify-content: center;
   position: absolute;
   align-items: center;
+  transform: translateZ(5px);
+
+  background-color: ${({ theme }) => theme.color.white};
+
+  ${({ theme, used }) =>
+    used &&
+    `
+      background-color: ${theme.color.lightGray};
+      color: ${theme.color.mediumGray};
+      cursor: default;
+    
+    `}
+
+  ${({ theme, clientChecked }) => {
+    switch (clientChecked) {
+      case 1:
+        return `
+        background-color: ${theme.color.blue};
+        color: ${theme.color.white};
+        font-size: 1.8rem;
+        `;
+      case 2:
+        return `
+          background-color: ${theme.color.main.complement};
+          color: ${theme.color.white};
+        font-size: 1.8rem;
+
+        `;
+    }
+  }}
 `;
+
 const NumberBack = styled.div`
   width: 100%;
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: bold;
 
   height: 100%;
   position: absolute;
 
   backface-visibility: hidden;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(3px);
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background-color: ${({ theme }) => theme.color.main.triad[1]};
+  color: ${({ theme }) => theme.color.black};
 `;
+
 const NumberContent = styled(motion.div)`
   width: 100%;
   height: 100%;
 
-  background-color: ${({ theme }) => theme.color.white};
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   display: flex;
@@ -94,34 +155,6 @@ const NumberContent = styled(motion.div)`
   top: 0;
   left: 0;
   transform-style: preserve-3d;
-  ${({ theme, used }) =>
-    used &&
-    `
-    background-color: ${theme.color.mediumGray};
-    color: ${theme.color.gray};
-    cursor: default;
-    
-    `}
-  ${({ theme, checked }) =>
-    checked &&
-    `
-    background-color: ${theme.color.main.complement};
-    color: ${theme.color.white};
-    `}
-  ${({ theme, clientChecked }) => {
-    switch (clientChecked) {
-      case 1:
-        return `
-        background-color: ${theme.color.main.triad[1]};
-        color: ${theme.color.mediumGray};
-        `;
-      case 2:
-        return `
-          background-color: ${theme.color.main.color};
-          color: ${theme.color.white};
-        `;
-    }
-  }}
 `;
 
 const Name = styled.small`

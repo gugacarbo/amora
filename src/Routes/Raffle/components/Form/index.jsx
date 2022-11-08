@@ -44,6 +44,7 @@ function Form({ open, setOpen }) {
     return () => clearTimeout(timeout);
   }
   if (clientData == null) return <></>;
+
   const animate = {
     disabled: {
       opacity: 0.3,
@@ -87,7 +88,6 @@ function Form({ open, setOpen }) {
       },
     },
   };
-
   return (
     <>
       <ErrorMessage
@@ -112,6 +112,11 @@ function Form({ open, setOpen }) {
             if (!values.name) {
               errors.name = "Digite Seu Nome";
             }
+
+            if (!values.lastName) {
+              errors.lastName = "Digite Seu último nome";
+            }
+
             const cpf = values.cpf.replace(/\D/g, "");
 
             if (!cpf) {
@@ -178,6 +183,7 @@ function Form({ open, setOpen }) {
                   <StyledInput
                     type="text"
                     name="name"
+                    maxLength={25}
                     placeholder="Digite seu nome"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -186,11 +192,31 @@ function Form({ open, setOpen }) {
                   />
                   <small>{errors.name && touched.name && errors.name}</small>
                 </Label>
+                
+                <Label>
+                  <span>Sobrenome</span>
+                  <StyledInput
+                    type="text"
+                    maxLength={25}
+                    name="lastName"
+                    placeholder="Digite seu último nome"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.lastName}
+                    error={
+                      errors.lastName && touched.lastName && errors.lastName
+                    }
+                  />
+                  <small>
+                    {errors.lastName && touched.lastName && errors.lastName}
+                  </small>
+                </Label>
                 <Label>
                   <span>CPF</span>
                   <StyledInput
                     as={InputMask}
                     mask="999.999.999-99"
+                    maskChar={null}
                     alwaysShowMask={false}
                     type="text"
                     name="cpf"
@@ -207,6 +233,7 @@ function Form({ open, setOpen }) {
                   <StyledInput
                     as={InputMask}
                     alwaysShowMask={false}
+                    maskChar={null}
                     mask="(99) 9.9999-9999"
                     type="text"
                     name="phone"
@@ -313,7 +340,7 @@ const StyledInput = styled.input`
 
 const MotionContainer = styled(motion.div)`
   width: 100%;
-  height: 50vh;
+  height: 60vh;
   position: absolute;
   bottom: 0;
   left: 0;

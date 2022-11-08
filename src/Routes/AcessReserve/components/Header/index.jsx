@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
- function Header() {
+function Header() {
   return (
     <HeaderContainer
       initial={{ y: "-100%" }}
@@ -9,7 +10,8 @@ import styled from "styled-components";
       exit={{ y: "-100%" }}
       transition={{ duration: 0.5 }}
     >
-      Reserva Concluída
+      Acessar Bilhetes
+      <BackButton to={-1}>{`<`}</BackButton>
     </HeaderContainer>
   );
 }
@@ -29,3 +31,17 @@ const HeaderContainer = styled(motion.div)`
   position: relative;
 `;
 
+const BackButton = styled(Link)`
+  width: 2rem;
+  height: 100%;
+  background-color: ${({ theme }) => theme.color.main.color};
+  color: ${({ theme }) => theme.color.white};
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  padding: 0 2rem;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

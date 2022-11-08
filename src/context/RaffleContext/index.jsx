@@ -15,6 +15,8 @@ const RaffleContext = createContext({
   openFormButtonRef: {},
   boughtNumbers: [],
   setBoughtNumbers: () => {},
+  getRifa: () => {},
+  resetClientData: () => {},
 });
 
 export default RaffleContext;

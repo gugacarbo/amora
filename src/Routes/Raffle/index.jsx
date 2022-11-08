@@ -63,7 +63,9 @@ function Raffle() {
         exit={{ x: "100%" }}
       >
         {checked.length === 0 ? (
-          <p>Selecione os números que deseja reservar</p>
+          <HeaderMessage>
+            Selecione os números que deseja reservar
+          </HeaderMessage>
         ) : (
           <>
             <CheckedNumbersShow>
@@ -110,6 +112,88 @@ function Raffle() {
     </RaffleContainer>
   );
 }
+export default Raffle;
+
+const RaffleContainer = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 5rem 4rem auto auto 1fr;
+  place-items: center;
+  overflow: hidden;
+`;
+
+const RaffleHeader = styled(motion.div)`
+  width: 90%;
+  height: 100%;
+  display: flex;
+  font-size: 1.1rem;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`;
+
+const HeaderMessage = styled.h4`
+  font-size: 1.2rem;
+`;
+
+const Title = styled(motion.h1)`
+  font-size: 2rem;
+  font-weight: 700;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.main.color};
+  position: relative;
+`;
+
+const CheckedNumbersShow = styled(motion.div)`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  align-items: center;
+  color: ${({ theme }) => theme.color.main.darker};
+  p {
+    font-size: 1.2rem;
+    color: ${({ theme }) => theme.color.main.darker};
+  }
+`;
+
+const Total = styled(CheckedNumbersShow)``;
+
+const RaffleNumbers = styled(motion.div)`
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  grid-template-rows: auto;
+  place-items: center;
+  overflow: visible;
+  margin-top: auto;
+  position: relative;
+  border-collapse: collapse;
+`;
+
+const BackButton = styled(Link)`
+  width: 2rem;
+  height: 100%;
+  background-color: ${({ theme }) => theme.color.main.color};
+  color: ${({ theme }) => theme.color.white};
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  padding: 0 2rem;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Button = styled(motion.div)`
   background-color: ${({ theme }) => theme.color.main.complement};
@@ -137,88 +221,8 @@ const Button = styled(motion.div)`
   ${({ disabled, theme }) =>
     disabled &&
     `
-     background-color: ${theme.color.lightGray};
+      background-color: ${theme.color.lightGray};
       filter: opacity(0.7) grayscale(100%);
       pointer-events: none;
     `}
 `;
-
-const CheckedNumbersShow = styled(motion.div)`
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  font-weight: 500;
-  font-family: "Poppins", sans-serif;
-  align-items: center;
-  color: ${({ theme }) => theme.color.main.darker};
-  p {
-    font-size: 1.2rem;
-    color: ${({ theme }) => theme.color.main.darker};
-  }
-`;
-const Total = styled(CheckedNumbersShow)``;
-
-const RaffleHeader = styled(motion.div)`
-  width: 90%;
-  height: 100%;
-  display: flex;
-  font-size: 1.1rem;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-`;
-
-const RaffleNumbers = styled(motion.div)`
-  width: 90%;
-  display: grid;
-  grid-template-columns: repeat(5, 20%);
-  grid-template-rows: auto;
-  place-items: center;
-  overflow: auto;
-  margin-top: auto;
-  position: relative;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  border-collapse: collapse;
-  padding-bottom: 1rem;
-`;
-
-const RaffleContainer = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 5rem 4rem 1fr auto 15rem;
-  place-items: center;
-  overflow: hidden;
-`;
-
-const Title = styled(motion.h1)`
-  font-size: 2rem;
-  font-weight: 700;
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.color.white};
-  color: ${({ theme }) => theme.color.main.color};
-  position: relative;
-`;
-const BackButton = styled(Link)`
-  width: 2rem;
-  height: 100%;
-  background-color: ${({ theme }) => theme.color.main.color};
-  color: ${({ theme }) => theme.color.white};
-  position: absolute;
-  top: 0rem;
-  left: 0rem;
-  padding: 0 2rem;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export default Raffle;

@@ -58,7 +58,7 @@ function Home() {
         transition={{ delay: 0.6, duration: 0.5 }}
         exit={{ y: "100vh" }}
       >
-        <Link to="/rifa/reserva">Ver meus números</Link>
+        <Link to="/acessar">Ver meus Bilhetes</Link>
       </LoginButton>
     </HomeContainer>
   );

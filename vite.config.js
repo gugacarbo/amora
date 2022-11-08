@@ -11,8 +11,3 @@ export default defineConfig({
     },
   },
 });
-/*
-build: {
-  assetsDir : 'sandbox/assets',
-},
-*/

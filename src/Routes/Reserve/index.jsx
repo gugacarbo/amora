@@ -8,7 +8,7 @@ import Loading from "../Loading";
 import Header from "./components/Header";
 import Title from "./components/Title";
 import Tickets from "./components/Tickets";
-import Content from "./components/content";
+import ReserveContent from "./components/ReserveContent";
 import { useNavigate } from "react-router-dom";
 
 function Reserve() {
@@ -20,14 +20,14 @@ function Reserve() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ delay: 0, duration: 0.5 }}
+      transition={{ delay: 0.4, duration: 0.6 }}
     >
       {raffleData?.name && clientData?.name ? (
         <>
           <Header />
           <Title />
           <Tickets />
-          <Content />
+          <ReserveContent />
         </>
       ) : (
         <Loading />
@@ -41,10 +41,11 @@ const ReserveContainer = styled(motion.div)`
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 10% auto auto auto 1fr 10%;
+  grid-template-rows: 10% auto auto 1fr;
   place-items: center;
   overflow: hidden;
   position: relative;
+  place-items: center;
 `;
 
 export default Reserve;
