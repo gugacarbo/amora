@@ -181,6 +181,7 @@ const RaffleNumbers = styled(motion.div)`
   position: relative;
   border-collapse: collapse;
   z-index: 10;
+  
 
   ${({ items, theme }) => {
     if (items < 25) {
