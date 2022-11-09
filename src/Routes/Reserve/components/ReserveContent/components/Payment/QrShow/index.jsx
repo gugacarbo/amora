@@ -49,15 +49,12 @@ function QrShow({ setShowQr, showQr, pixQrCode }) {
   };
   return (
     <QrContent
+      initial={{ opacity: 0, transition: { duration: 0.001 } }}
       variants={ContentAnimation}
       animate={showQr ? "open" : "close"}
       onClick={() => setShowQr(!showQr)}
     >
-      <QrImageBox
-        variants={QrAnimation}
-        animate={showQr ? "open" : "close"}
-        transition={{ duration: 0.5 }}
-      >
+      <QrImageBox variants={QrAnimation} animate={showQr ? "open" : "close"}>
         <Qrcode src={pixQrCode} alt="" />
       </QrImageBox>
     </QrContent>
@@ -89,4 +86,7 @@ const Qrcode = styled.img`
 
 const QrImageBox = styled(motion.div)`
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

@@ -17,6 +17,9 @@ const RaffleContext = createContext({
   setBoughtNumbers: () => {},
   getRifa: () => {},
   resetClientData: () => {},
+  cancelReserve: (number, clientId, raffleId) => {},
+  payMessage: false,
+  setPayMessage: () => {},
 });
 
 export default RaffleContext;

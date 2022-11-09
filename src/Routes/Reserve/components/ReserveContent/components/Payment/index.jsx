@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
 
 import RaffleContext from "../../../../../../context/RaffleContext";
@@ -21,34 +21,48 @@ function Payment() {
   );
 
   return (
-    <PaymentContainer>
-      <PagueComPix>
-        Pague com Pix <PixSvg />
-      </PagueComPix>
-      <PixReceiverData>
-        <span>
-          Valor Total: R$
-          {(boughtNumbers.length * raffleData.number_price)
-            .toFixed(2)
-            .replace(".", ",")}
-        </span>
-        <span>Beneficiário: Nicole Mascarenhas</span>
-        <span>Chave: (48) 9.8843-1797</span>
-        <span>Instituição: NU PAGAMENTOS</span>
-      </PixReceiverData>
-      <PixCodeInput
-        pixCode={pixCode}
-        setShowQr={setShowQr}
-        pixQrCode={pixQrCode}
-      />
+    <>
+      <PaymentContainer
+        initial={{ opacity: 0, y: "100%" }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          transition: { delay: 0.8, duration: 0.5 },
+        }}
+        exit={{
+          opacity: 0,
+          y: "100%",
+          transition: { delay: 0.4, duration: 0.5 },
+        }}
+      >
+        <PagueComPix>
+        <PixSvg /> Pague com Pix <PixSvg />
+        </PagueComPix>
+        <PixReceiverData>
+          <span>
+            Valor Total: R$
+            {(boughtNumbers.length * raffleData.number_price)
+              .toFixed(2)
+              .replace(".", ",")}
+          </span>
+          <span>Beneficiário: Nicole Mascarenhas</span>
+          <span>Chave: (48) 9.8843-1797</span>
+          <span>Instituição: NU PAGAMENTOS</span>
+        </PixReceiverData>
+        <PixCodeInput
+          pixCode={pixCode}
+          setShowQr={setShowQr}
+          pixQrCode={pixQrCode}
+        />
+      </PaymentContainer>
       <QrShow setShowQr={setShowQr} pixQrCode={pixQrCode} showQr={showQr} />
-    </PaymentContainer>
+    </>
   );
 }
 
 export default Payment;
 
-const PaymentContainer = styled.div`
+const PaymentContainer = styled(motion.div)`
   font-size: 1.2rem;
   width: 100%;
   padding: 2rem 0;
@@ -67,8 +81,9 @@ const PagueComPix = styled.span`
   align-items: center;
   justify-content: center;
   font-size: 1.6rem;
+  gap: 1rem;
+
   svg {
-    margin-left: 1rem;
     width: 1.8rem;
     height: 1.8rem;
     fill: ${({ theme }) => theme.color.white};

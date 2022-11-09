@@ -9,7 +9,7 @@ import RaffleContext from "../../../../context/RaffleContext";
   return (
     <TitleContainer
       initial={{ opacity: 0, scale: 0.3 }}
-      animate={{ opacity: 1, scale: 1 }}
+      animate={{ opacity: 1, scale: 1}}
       exit={{ opacity: 0, scale: 0.3 }}
       transition={{ duration: 0.5 }}
     >

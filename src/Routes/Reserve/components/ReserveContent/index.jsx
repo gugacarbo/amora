@@ -1,11 +1,24 @@
 import styled from "styled-components";
 import Payment from "./components/Payment";
 import Contact from "./components/Contact";
+import { motion } from "framer-motion";
 
 function ReserveContent() {
   return (
     <ReserveContainer>
-      <Title>
+      <Title
+        initial={{ opacity: 0, x: "-100%" }}
+        animate={{
+          opacity: 1,
+          x: 0,
+          transition: { delay: 0.4, duration: 0.5 },
+        }}
+        exit={{
+          opacity: 0,
+          x: "100%",
+          transition: { delay: 0.2, duration: 0.5 },
+        }}
+      >
         A Amora agradece a sua contribuição e deseja boa sorte! Au Au!
       </Title>
       <Payment />
@@ -23,7 +36,7 @@ const ReserveContainer = styled.div`
   grid-template-rows: auto auto auto;
 `;
 
-const Title = styled.h3`
+const Title = styled(motion.h3)`
   font-size: 1.2rem;
   width: 100%;
   padding: 0.5rem 0;

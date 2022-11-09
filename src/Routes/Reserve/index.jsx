@@ -12,9 +12,14 @@ import ReserveContent from "./components/ReserveContent";
 import { useNavigate } from "react-router-dom";
 
 function Reserve() {
-  const { raffleData, clientData } = useContext(RaffleContext);
+  const { raffleData, clientData, boughtNumbers } = useContext(RaffleContext);
   const navigate = useNavigate();
   if (clientData?.name == "") navigate("/rifa");
+  useEffect(() => {
+    if (boughtNumbers.length == 0) {
+      navigate("/");
+    }
+  }, [boughtNumbers]);
   return (
     <ReserveContainer
       initial={{ opacity: 0 }}

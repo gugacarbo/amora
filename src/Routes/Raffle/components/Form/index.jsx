@@ -350,6 +350,7 @@ const MotionContainer = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 15;
   &::before {
     content: "";
     border-radius: 5rem;

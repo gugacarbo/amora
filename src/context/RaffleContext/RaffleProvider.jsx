@@ -102,7 +102,7 @@ export default ({ children }) => {
 
   const openFormButtonRef = useRef(null);
 
-  const [boughtNumbers, setBoughtNumbers] = useState([3, 2, 40]);
+  const [boughtNumbers, setBoughtNumbers] = useState([2]);
   function resetClientData() {
     setClientToken("");
 
@@ -116,6 +116,20 @@ export default ({ children }) => {
       phone: "",
     });
     localStorage.removeItem("AmoraToken");
+  }
+
+  const cancelReserve = (number, clientId, raffleId) =>
+    api.post("/cancelar.php", {
+      number,
+      clientId: clientId,
+      raffleId: raffleId,
+      token: clientToken,
+    });
+
+  const [payMessage, setPayMessage] = useState(false);
+
+  function handlePayMessage(message) {
+    setPayMessage(message ? true : false);
   }
   return (
     <RaffleContext.Provider
@@ -138,6 +152,9 @@ export default ({ children }) => {
         setBoughtNumbers,
         getRifa,
         resetClientData,
+        cancelReserve,
+        payMessage,
+        setPayMessage: handlePayMessage,
       }}
     >
       {children}

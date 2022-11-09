@@ -3,7 +3,8 @@ import Div100vh from "react-div-100vh";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Image from "./components/Image";
-
+import { ReactComponent as WhatsappSvg } from "../../assets/whatsapp.svg";
+import { ReactComponent as InstagramSvg } from "../../assets/instagram.svg";
 function Home() {
   const navigate = useNavigate();
 
@@ -60,6 +61,45 @@ function Home() {
       >
         <Link to="/acessar">Ver meus Bilhetes</Link>
       </LoginButton>
+      <Instagram
+        onClick={() => {
+          window.open("https://www.instagram.com/bruja.queer/");
+        }}
+        initial={{ opacity: 0, y: "100%" }}
+        animate={{
+          opacity: 0.8,
+          y: 0,
+          transition: { delay: 0.8, duration: 0.5 },
+        }}
+        exit={{
+          opacity: 0,
+          y: "100%",
+          transition: { delay: 0.6, duration: 0.5 },
+        }}
+      >
+        <InstagramSvg />
+      </Instagram>
+      <Whatsapp
+        onClick={() => {
+          let message = `Olá, quero de saber mais sobre a Amora!`;
+          window.open(
+            "https://api.whatsapp.com/send?phone=5548988431797&text=" + message
+          );
+        }}
+        initial={{ opacity: 0, y: "100%" }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          transition: { delay: 1, duration: 0.5 },
+        }}
+        exit={{
+          opacity: 0,
+          y: "100%",
+          transition: { delay: 0.4, duration: 0.5 },
+        }}
+      >
+        <WhatsappSvg />
+      </Whatsapp>
     </HomeContainer>
   );
 }
@@ -154,6 +194,7 @@ const HomeContainer = styled(motion.div)`
     " login login ";
   place-items: center;
   overflow: hidden;
+  position: relative;
 `;
 
 const Title = styled(motion.h1)`
@@ -169,4 +210,43 @@ const Title = styled(motion.h1)`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+const Whatsapp = styled(motion.div)`
+  position: absolute;
+  left: 4.5rem;
+  bottom: 1.5rem;
+  width: 1.6rem;
+  height: 1.6rem;
+
+  svg {
+    overflow: visible;
+    width: 100%;
+    height: 100%;
+    //whatsapp color
+    fill: #25d366;
+    stroke-width: 0.2rem;
+    transition: ${({ theme }) => theme.transition.x2};
+    cursor: pointer;
+    stroke: ${({ theme }) => theme.color.main.complement};
+    filter: drop-shadow(0 0 0.1rem ${({ theme }) => theme.color.white});
+    &:hover {
+      stroke: ${({ theme }) => theme.color.white};
+      filter: drop-shadow(0 0 0.2rem ${({ theme }) => theme.color.green});
+    }
+  }
+`;
+
+const Instagram = styled(Whatsapp)`
+  left: 1.5rem;
+  bottom: 1.5rem;
+
+  right: unset;
+  svg {
+    fill: #e1306c;
+    stroke: #e1306c;
+    &:hover {
+      filter: drop-shadow(0 0 0.2rem #e04e7f);
+      stroke: #ff96b9;
+    }
+  }
 `;

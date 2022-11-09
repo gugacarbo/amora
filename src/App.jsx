@@ -25,7 +25,6 @@ const AppContent = styled.div`
   background-color: ${({ theme }) => theme.background};
   @media (max-width: 510px) {
     width: 100vw;
-    height: 100vh;
   }
 `;
 const AppContainer = styled(Div100vh)`

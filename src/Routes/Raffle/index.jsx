@@ -7,11 +7,11 @@ import Form from "./components/Form";
 import Legend from "./components/Legend";
 import Number from "./components/Number";
 import Loading from "../Loading";
+import ColorLegend from "./components/ColorLegend";
 
 function Raffle() {
   const { raffleData, checked, openFormButtonRef } = useContext(RaffleContext);
   const [formModalOpen, setFormModalOpen] = useState(false);
-
   if (!raffleData?.name)
     return (
       <RaffleContainer
@@ -91,12 +91,14 @@ function Raffle() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.4, duration: 0.5 }}
         exit={{ opacity: 0, scale: 0.7 }}
+        items={numbers.length}
       >
         {numbers.map((number) => {
           return number;
         })}
       </RaffleNumbers>
       <Legend />
+      <ColorLegend />
       <Button
         ref={openFormButtonRef}
         onClick={() => setFormModalOpen((x) => !x)}
@@ -119,8 +121,9 @@ const RaffleContainer = styled(motion.div)`
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 5rem 4rem auto auto 1fr;
+  grid-template-rows: 5rem 4rem auto auto auto 1fr;
   place-items: center;
+  position: relative;
   overflow: hidden;
 `;
 
@@ -171,13 +174,33 @@ const Total = styled(CheckedNumbersShow)``;
 const RaffleNumbers = styled(motion.div)`
   width: 90%;
   display: grid;
-  grid-template-columns: repeat(5, 20%);
   grid-template-rows: auto;
   place-items: center;
   overflow: visible;
   margin-top: auto;
   position: relative;
   border-collapse: collapse;
+  z-index: 10;
+
+  ${({ items, theme }) => {
+    if (items < 25) {
+      return `grid-template-columns: repeat(5, 1fr);`;
+    } else if (items >= 25 && items < 35) {
+      return `grid-template-columns: repeat(6, 1fr);`;
+    } else if (items >= 35 && items < 51) {
+      return `grid-template-columns: repeat(7, 1fr);`;
+    } else if (items >= 51) {
+      return `
+        max-height: 50vh;
+        overflow-x:hidden;
+        overflow-y:scroll;
+        background-color: ${theme.color.main.lighter};
+        border-top: 2px solid ${theme.color.lighter};
+        border-left: 1px solid ${theme.color.main.lighter};
+        border-right: 1px solid ${theme.color.main.lighter};
+        grid-template-columns: repeat(6, 1fr);`;
+    }
+  }}
 `;
 
 const BackButton = styled(Link)`

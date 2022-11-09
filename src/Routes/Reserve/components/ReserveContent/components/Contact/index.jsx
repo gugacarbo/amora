@@ -5,9 +5,18 @@ import { ReactComponent as HouseBoneSvg } from "../../../../../../assets/houseBo
 import { ReactComponent as WhatsappSvg } from "../../../../../../assets/whatsapp.svg";
 import { ReactComponent as InstagramSvg } from "../../../../../../assets/instagram.svg";
 import { ReactComponent as LogoSvg } from "../../../../../../assets/logo.svg";
+import { motion } from "framer-motion";
 function Contact() {
   return (
-    <ContactContainer>
+    <ContactContainer
+      initial={{ opacity: 0, y: "100%" }}
+      animate={{ opacity: 1, y: 0, transition: { delay: 0.4, duration: 0.5 } }}
+      exit={{
+        opacity: 0,
+        y: "100%",
+        transition: { delay: 0.6, duration: 0.5 },
+      }}
+    >
       <Home to="/">
         <IconBox>
           <HouseBoneSvg />
@@ -20,13 +29,24 @@ function Contact() {
         </IconBox>
         Meus Bilhetes
       </Reserves>
-      <Whatsapp>
+      <Whatsapp
+        onClick={() => {
+          let message = `Olá, quero de saber mais sobre a Amora!`;
+          window.open(
+            "https://api.whatsapp.com/send?phone=5548988431797&text=" + message
+          );
+        }}
+      >
         <IconBox>
           <WhatsappSvg />
         </IconBox>
         Whatsapp
       </Whatsapp>
-      <Instagram>
+      <Instagram
+        onClick={() =>
+          window.open("https://www.instagram.com/bruja.queer/")
+        }
+      >
         <IconBox>
           <InstagramSvg />
         </IconBox>
@@ -36,7 +56,7 @@ function Contact() {
   );
 }
 
-const ContactContainer = styled.div`
+const ContactContainer = styled(motion.div)`
   font-size: 1.2rem;
   width: 100%;
   padding: 2rem 0;

@@ -26,13 +26,13 @@ export function Pix(cpf, numbers, price) {
   const [qrCode, setQrCode] = useState("");
   const [pixCode, setPixCode] = useState("");
   var qrCodePix;
-  
+
   if (cpf && numbers?.length && price && pixCode == "") {
-    let message = `Rifa Da Amora Seu${numbers.length > 1 ? "s" : ""}
-  Numero${numbers.length > 1 ? "s" : ""} 
-  ${numbers.sort((a, b) => a - b).join(", ")}`;
-    let transactionId =
-      cpf.slice(0, 3) + "A" + numbers.sort((a, b) => a - b).join("n");
+    let message = `A Amora Agradece Sua Contribuicao!`;
+    let transactionId = numbers.sort((a, b) => a - b).join("");
+    if (transactionId.length > 24) {
+      transactionId = transactionId.slice(0, 23);
+    }
     qrCodePix = QrCodePix({
       version: "01",
       key: "03320312090", //or any PIX key

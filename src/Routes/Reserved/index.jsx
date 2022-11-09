@@ -1,12 +1,14 @@
-import { motion } from "framer-motion";
-import { useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Header from "./components/Header";
+import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useRef, useState } from "react";
+
 import RaffleContext from "../../context/RaffleContext";
-import api from "../../util/api";
-import { useState } from "react";
-import Loading from "../Loading";
+
+import Header from "./components/Header";
+import Ticket from "./components/Ticket";
+import PayingHeader from "./components/PayingHeader";
+import PayConfirm from "./components/PayConfirm";
 
 function Reserved() {
   const {
@@ -16,7 +18,22 @@ function Reserved() {
     clientData,
     clientToken,
     setClientToken,
+    raffleData,
+    setBoughtNumbers,
+    payMessage,
+    setPayMessage,
   } = useContext(RaffleContext);
+
+  const [paying, setPaying] = useState([]);
+  const [goToPay, setGoToPay] = useState(false);
+
+  const handleSetPaying = (number) => {
+    if (paying.includes(number)) {
+      setPaying(paying.filter((item) => item != number));
+    } else {
+      setPaying([...paying, number]);
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -26,16 +43,55 @@ function Reserved() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ delay: 0.4, duration: 0.5 }}
+      isPaying={paying.length > 0}
     >
       <Header />
-      {Object.keys(clientNumbers).map((number) => (
-        <Number key={number}>{number}</Number>
-      ))}
+      {paying.length > 0 && ""}
+      <PayingHeader
+        showHeader={paying.length > 0}
+        closeHeader={() => setPaying([])}
+        paying={paying}
+      />
+      <TicketsContainer>
+        {Object.keys(clientNumbers).map((number) => (
+          <Ticket
+            key={number}
+            number={number}
+            data={clientNumbers[number]}
+            text={"Prêmio: Bolo Artesanal"}
+            paying={paying}
+            setPaying={handleSetPaying}
+          />
+        ))}
+      </TicketsContainer>
+      <PayButton
+        initial={{ y: "200%" }}
+        animate={paying.length > 0 ? { y: 0 } : { y: "200%" }}
+        exit={{ y: "200%" }}
+        transition={{ duration: 0.5 }}
+        onClick={() => {
+          if (payMessage) {
+            setBoughtNumbers(paying.sort((a, b) => a - b));
+            navigate("/rifa/reserva");
+          } else {
+            setGoToPay(true);
+          }
+        }}
+      >
+        Pagar
+      </PayButton>
+      <PayConfirm
+        goToPay={goToPay}
+        setGoToPay={setGoToPay}
+        paying={paying}
+        setPaying={setPaying}
+        setBoughtNumbers={setBoughtNumbers}
+        setPayMessage={setPayMessage}
+      />
     </ReservedContainer>
   );
 }
 export default Reserved;
-const Number = styled.div``;
 
 const ReservedContainer = styled(motion.div)`
   width: 100%;
@@ -45,4 +101,74 @@ const ReservedContainer = styled(motion.div)`
   display: grid;
   grid-template-rows: 10% auto;
   grid-template-columns: 1fr;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    z-index: 3;
+    pointer-events: none;
+    transition: ${({ theme }) => theme.transition.slow};
+  }
+
+  ${({ isPaying }) =>
+    isPaying &&
+    `
+  position: relative;
+  &::before {
+    opacity: 1;
+  }
+ 
+`}
+`;
+
+const TicketsContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  overflow-y: auto;
+  padding: 3rem 1rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10rem;
+`;
+
+const PayButton = styled(motion.div)`
+  background-color: ${({ theme }) => theme.color.main.complement};
+
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  transition: ${({ theme }) => theme.transition.slow};
+  width: 70%;
+  text-align: center;
+  border: 1px solid transparent;
+  margin: 0.5rem;
+  position: absolute;
+  bottom: 3rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 100;
+  cursor: pointer;
+
+  color: ${({ theme }) => theme.color.white};
+  text-decoration: none;
+  &:hover {
+    color: ${({ theme }) => theme.color.main.complement};
+    background-color: ${({ theme }) => theme.color.white};
+    border: 1px solid ${({ theme }) => theme.color.main.complement};
+    box-shadow: 0 0 0.2rem 0.2rem ${({ theme }) => theme.color.main.complement};
+  }
 `;

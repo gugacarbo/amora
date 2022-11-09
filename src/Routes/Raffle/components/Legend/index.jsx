@@ -4,10 +4,13 @@ import styled from "styled-components";
 function Legend() {
   return (
     <LegendContainer
-      initial={{ opacity: 0, x: "-100%" }}
-      animate={{ opacity: 1, x: 0, transition: { delay: 0.6, duration: 0.5 } }}
-      transition={{ delay: 0.2, duration: 0.5 }}
-      exit={{ opacity: 0, x: "-100%" }}
+    initial={{ opacity: 0, y: "-100%" }}
+    animate={{ opacity: 1, y: 0, transition: { delay: 0.8, duration: 0.5 } }}
+    exit={{
+      opacity: 0,
+      y: "-100%",
+      transition: { delay: 0.2, duration: 0.3 },
+    }}
     >
       <LegendItem>
         Prêmio: <span>Bolo</span>
@@ -25,6 +28,7 @@ const LegendContainer = styled(motion.div)`
   align-items: center;
   position: relative;
   padding: 0.5rem;
+  z-index: 3;
   background-color: ${({ theme }) => theme.color.white};
 `;
 
