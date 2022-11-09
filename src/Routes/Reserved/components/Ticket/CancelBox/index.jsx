@@ -61,7 +61,7 @@ const CancelConfirm = styled(motion.div)`
   left: 0;
   width: 100%;
   height: 100%;
-  background: ${({ theme }) => theme.color.main.dark + "da"};
+  background: ${({ theme }) => theme.color.main.dark + "aa"};
   z-index: 10;
   border-radius: 10px;
   display: flex;
@@ -82,7 +82,7 @@ const CancelButtons = styled.div`
 `;
 
 const CancelButton = styled.button`
-  width: 40%;
+  width: 30%;
   height: 40px;
   border-radius: 10px;
   border: none;
@@ -93,6 +93,8 @@ const CancelButton = styled.button`
   cursor: pointer;
   background: ${({ theme }) => theme.color.main.light};
   transition: ${({ theme }) => theme.transition.main};
+
+  border: 1px solid ${({ theme }) => theme.color.main.color};
   &:hover {
     background: ${({ theme }) => theme.color.white};
     color: ${({ theme }) => theme.color.black};

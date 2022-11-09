@@ -9,10 +9,10 @@ import { motion } from "framer-motion";
 function Image() {
   return (
     <ImageContainer
-      initial={{ opacity: 0, x: "100%" }}
+      initial={{ opacity: 0, x: "70vw" }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.2, duration: 0.5 }}
-      exit={{ opacity: 0, x: "100%" }}
+      exit={{ opacity: 0, x: "70vw" }}
     >
       <img src={Amora3} alt="Amora" />
       <Moldure />
@@ -22,22 +22,24 @@ function Image() {
 const ImageContainer = styled(motion.div)`
   grid-area: HomeImage;
   width: 80%;
+  max-height: 100%;
   background-color: ${({ theme }) => theme.background};
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-left: auto;
-  margin-right: 3rem;
+  margin-right: auto;
+  overflow: hidden;
   svg {
-    width: 170%;
-    height: 160%;
+    width: 110%;
+    height: 100%;
     position: absolute;
-    left: -45%;
-    transform: scale(1.15);
-    top: -28%;
+    transform: scale(1.2);
+    left: -13%;
     * {
       fill: ${({ theme }) => theme.background};
+      fill: transparent;
       stroke: ${({ theme }) => theme.color.main.color};
       stroke-width: 20px;
       stroke-dashoffset: 20;
@@ -45,7 +47,7 @@ const ImageContainer = styled(motion.div)`
     }
   }
   img {
-    transform: scale(1.15);
+    transform: scale(0.8);
 
     z-index: 10;
     width: 100%;

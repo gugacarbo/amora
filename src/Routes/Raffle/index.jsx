@@ -8,10 +8,18 @@ import Legend from "./components/Legend";
 import Number from "./components/Number";
 import Loading from "../Loading";
 import ColorLegend from "./components/ColorLegend";
+import { ReactComponent as TicketIcon } from "../../assets/ticketIcon.svg";
+import { ReactComponent as ArrowLeftIcon } from "../../assets/arrowLeft.svg";
 
 function Raffle() {
-  const { raffleData, checked, openFormButtonRef } = useContext(RaffleContext);
+  const { raffleData, checked, openFormButtonRef, getRifa } =
+    useContext(RaffleContext);
   const [formModalOpen, setFormModalOpen] = useState(false);
+
+  useEffect(() => {
+    getRifa();
+  }, []);
+
   if (!raffleData?.name)
     return (
       <RaffleContainer
@@ -23,6 +31,7 @@ function Raffle() {
         <Loading />
       </RaffleContainer>
     );
+
   var numbers = [];
 
   for (var i = 1; i <= raffleData.number_quantity; i++) {
@@ -53,7 +62,14 @@ function Raffle() {
         exit={{ x: "-100%" }}
         transition={{ duration: 0.5 }}
       >
-        <BackButton to={-1}>{`<`}</BackButton>
+        <BackButton to={"/"}>
+          <ArrowLeftIcon />
+          <small>Voltar</small>
+        </BackButton>
+        <ToRaffleButton to="/acessar">
+          <TicketIcon />
+          <small>Meus Bilhetes</small>
+        </ToRaffleButton>
         Rifa da Amora
       </Title>
       <RaffleHeader
@@ -121,7 +137,7 @@ const RaffleContainer = styled(motion.div)`
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 5rem 4rem auto auto auto 1fr;
+  grid-template-rows: 7rem auto auto auto auto 1fr;
   place-items: center;
   position: relative;
   overflow: hidden;
@@ -135,6 +151,8 @@ const RaffleHeader = styled(motion.div)`
   justify-content: center;
   align-items: center;
   position: relative;
+  padding: 1rem 0;
+  background-color: ${(props) => props.theme.color.white + "80"};
 `;
 
 const HeaderMessage = styled.h4`
@@ -176,22 +194,40 @@ const RaffleNumbers = styled(motion.div)`
   display: grid;
   grid-template-rows: auto;
   place-items: center;
-  overflow: visible;
-  margin-top: auto;
+  margin-bottom: auto;
   position: relative;
   border-collapse: collapse;
-  
+  height: 100%;
+  overflow: hidden;
+  @media (max-width: 1366px) and (min-width: 800px) {
+    overflow-y: auto;
+  }
   z-index: 10;
-  
 
   ${({ items, theme }) => {
     if (items < 25) {
-      return `grid-template-columns: repeat(5, 1fr);`;
+      return `
+      
+          grid-template-columns: repeat(6, 1fr);
+          
+          @media (max-width: 800px) {
+            grid-template-columns: repeat(5, 1fr);
+          }
+          `;
     } else if (items >= 25 && items < 35) {
-      return `grid-template-columns: repeat(6, 1fr);`;
-    } else if (items >= 35 && items < 51) {
-      return `grid-template-columns: repeat(7, 1fr);`;
-    } else if (items >= 51) {
+      return `
+      grid-template-columns: repeat(6, 1fr);
+      @media (min-width: 800px) and (max-width: 1600px) {
+          grid-template-columns: repeat(7, 1fr);
+        }
+      `;
+    } else if (items >= 35 && items < 43) {
+      return `grid-template-columns: repeat(7, 1fr);
+        @media (min-width: 800px) and (max-width: 1600px) {
+          grid-template-columns: repeat(8, 1fr);
+        }
+      `;
+    } else if (items >= 43) {
       return `
         max-height: 50vh;
         overflow-x:hidden;
@@ -206,18 +242,49 @@ const RaffleNumbers = styled(motion.div)`
 `;
 
 const BackButton = styled(Link)`
-  width: 2rem;
   height: 100%;
   background-color: ${({ theme }) => theme.color.main.color};
   color: ${({ theme }) => theme.color.white};
   position: absolute;
   top: 0rem;
   left: 0rem;
-  padding: 0 2rem;
+  padding: 0 3rem;
   text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: ${({ theme }) => theme.transition.main};
+  svg {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    fill: ${({ theme }) => theme.color.white};
+    transition: ${({ theme }) => theme.transition.main};
+  }
+  small {
+    position: absolute;
+    bottom: 0.5rem;
+    width: 90%;
+    font-size: 0.8rem;
+    text-align: center;
+    transition: ${({ theme }) => theme.transition.main};
+  }
+  &:hover {
+    svg {
+      fill: ${({ theme }) => theme.color.main.triad[1]};
+    }
+    small {
+      color: ${({ theme }) => theme.color.main.triad[1]};
+    }
+  }
+`;
+
+const ToRaffleButton = styled(BackButton)`
+  left: auto;
+  right: 0;
+  svg {
+    width: 3.5rem;
+  }
 `;
 
 const Button = styled(motion.div)`

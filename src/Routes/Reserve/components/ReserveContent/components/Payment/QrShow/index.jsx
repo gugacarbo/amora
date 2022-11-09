@@ -82,6 +82,9 @@ const QrContent = styled(motion.div)`
 
 const Qrcode = styled.img`
   width: 80%;
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 `;
 
 const QrImageBox = styled(motion.div)`

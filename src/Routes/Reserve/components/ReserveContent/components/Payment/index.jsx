@@ -36,7 +36,7 @@ function Payment() {
         }}
       >
         <PagueComPix>
-        <PixSvg /> Pague com Pix <PixSvg />
+          <PixSvg /> Pague com Pix <PixSvg />
         </PagueComPix>
         <PixReceiverData>
           <span>
@@ -74,6 +74,9 @@ const PaymentContainer = styled(motion.div)`
   gap: 2rem;
   flex-direction: column;
   align-items: center;
+  @media (min-width: 768px) {
+    gap: 1rem;
+  }
 `;
 
 const PagueComPix = styled.span`
@@ -95,10 +98,13 @@ const PagueComPix = styled.span`
 
 const PixReceiverData = styled.div`
   width: 100%;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  justify-content: space-evenly;
+
   font-family: "Poppins", sans-serif;
   gap: 0.5rem;
   span {

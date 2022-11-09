@@ -21,12 +21,13 @@ function ColorLegend() {
         <ColorLegendText>Selecionado</ColorLegendText>
       </ColorLegendItem>
       <ColorLegendItem>
-        <Color color="#0099cc" />
-        <ColorLegendText>Pago</ColorLegendText>
-      </ColorLegendItem>
-      <ColorLegendItem>
         <Color color="#bbbbbb" />
         <ColorLegendText>Inisponível</ColorLegendText>
+      </ColorLegendItem>
+      <ColorLegendItem>
+        <Color color="#0099cc" />
+        <Color color="#2ecc71" />
+        <ColorLegendText>Reservado/Pago</ColorLegendText>
       </ColorLegendItem>
     </ColorLegendContainer>
   );
@@ -35,11 +36,12 @@ export default ColorLegend;
 
 const ColorLegendContainer = styled(motion.div)`
   width: 90%;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   background-color: ${({ theme }) => theme.color.white + "80"};
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   gap: 0.5rem;
   z-index: 2;
 `;

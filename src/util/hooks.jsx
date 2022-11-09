@@ -35,7 +35,7 @@ export function Pix(cpf, numbers, price) {
     }
     qrCodePix = QrCodePix({
       version: "01",
-      key: "03320312090", //or any PIX key
+      key: import.meta.env.VITE_PIX_KEY, //or any PIX key
       name: "Nicole Mascarenhas",
       city: "Florianopolis",
       transactionId,

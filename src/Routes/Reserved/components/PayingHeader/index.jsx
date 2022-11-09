@@ -54,28 +54,6 @@ function PayingHeader({ showHeader, closeHeader, paying }) {
 
 export default PayingHeader;
 
-const CancelButton = styled.button`
-  background-color: transparent;
-  border: none;
-  color: ${({ theme }) => theme.color.red};
-  font-size: 1.2rem;
-  z-index: 4;
-  padding: 0.5rem;
-
-  transition: ${({ theme }) => theme.transition.slow};
-  cursor: pointer;
-  &:hover {
-    color: ${({ theme }) => theme.color.main.color};
-  }
-`;
-const Total = styled.div`
-  font-family: "Poppins", sans-serif;
-  color: ${({ theme }) => theme.color.darkerGray};
-  b {
-    color: ${({ theme }) => theme.color.main.dark};
-  }
-`;
-
 const PayingHeaderBox = styled(motion.div)`
   position: absolute;
   top: 0;
@@ -101,7 +79,35 @@ const PayingHeaderBox = styled(motion.div)`
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     width: 90%;
+    margin: 0.5rem 0;
+    font-size: 1.4rem;
     text-align: center;
     grid-column: 1/3;
+  }
+`;
+
+const Total = styled.div`
+  font-family: "Poppins", sans-serif;
+  font-size: 1.4rem;
+  color: ${({ theme }) => theme.color.darkerGray};
+  b {
+    color: ${({ theme }) => theme.color.main.dark};
+  }
+`;
+
+const CancelButton = styled.button`
+  background-color: transparent;
+  border: none;
+  color: ${({ theme }) => theme.color.red};
+  font-size: 1.2rem;
+  z-index: 4;
+  padding: 0.5rem;
+  transition: ${({ theme }) => theme.transition.slow};
+  cursor: pointer;
+  padding: 0.3rem 1rem;
+  border-radius: 0.3rem;
+  &:hover {
+    background-color: ${({ theme }) => theme.color.red + "ef"};
+    color: ${({ theme }) => theme.color.white};
   }
 `;

@@ -26,6 +26,8 @@ function Ticket({ number, text }) {
 
 const TicketContainer = styled.div`
   width: 100%;
+     
+
   svg {
     width: 100%;
     height: 100%;

@@ -43,22 +43,21 @@ const HeaderContainer = styled(motion.div)`
 `;
 
 const BackButton = styled(Link)`
-  width: 2rem;
   height: 100%;
   background-color: ${({ theme }) => theme.color.main.color};
   color: ${({ theme }) => theme.color.white};
   position: absolute;
   top: 0rem;
   left: 0rem;
-  padding: 0 2rem;
+  padding: 0 3rem;
   text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
   svg {
     position: absolute;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3rem;
+    height: 3rem;
     top: 1rem;
     fill: ${({ theme }) => theme.color.white};
   }
@@ -74,7 +73,8 @@ const LogoutButton = styled(BackButton)`
   right: 0rem;
 
   svg {
-    width: 2rem;
-    height: 2rem;
+    top: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 `;

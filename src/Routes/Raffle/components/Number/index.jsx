@@ -79,6 +79,7 @@ const NumberBox = styled(motion.div)`
   justify-content: center;
   align-items: center;
   perspective: 1000px;
+
 `;
 const NumberFront = styled.div`
   width: 100%;
@@ -146,7 +147,8 @@ const NumberContent = styled(motion.div)`
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   display: flex;
-  border: 1px solid ${({ theme }) => theme.color.mediumGray};
+    border: 0.01rem solid ${({ theme }) => theme.color.lightGray};
+  
   justify-content: center;
   align-items: center;
   cursor: pointer;

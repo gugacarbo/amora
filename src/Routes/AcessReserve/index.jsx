@@ -22,7 +22,7 @@ function AcessReserve() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (clientToken) {
+    if (clientToken != "" && clientToken != null) {
       setIsAutenting(1);
 
       api
@@ -50,7 +50,7 @@ function AcessReserve() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{  duration: 0.3 }}
+      transition={{ duration: 0.3 }}
     >
       {IsAutenting == 1 && <Loading />}
       {IsAutenting == 0 && (
@@ -68,7 +68,6 @@ export default AcessReserve;
 const AcessReserveContainer = styled(motion.div)`
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => theme.background};
   overflow: hidden;
   display: grid;
   grid-template-rows: 10% auto;

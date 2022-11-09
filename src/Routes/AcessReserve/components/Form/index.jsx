@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 import Loading from "../../../Loading";
 import Error from "../Error";
 
-function Form({ open, setOpen }) {
+function Form() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const {
@@ -39,7 +39,18 @@ function Form({ open, setOpen }) {
     <>
       <Error error={errorMessage} setError={setErrorMessage} />
 
-      <MotionContainer>
+      <MotionContainer
+        initial={{ opacity: 0, y: "100%" }}
+        animate={{
+          opacity: 1,
+          y: "0%",
+          transition: {
+            delay: 0.4,
+            duration: 0.5,
+          },
+        }}
+        exit={{ opacity: 0, transition: { duration: 0.3 } }}
+      >
         <Formik
           initialValues={{
             cpf: "",
@@ -183,7 +194,7 @@ const Label = styled.label`
   }
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled(motion.input)`
   width: 100%;
   height: 100%;
   border: none;

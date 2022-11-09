@@ -5,7 +5,7 @@ import RaffleContext from "../../../../context/RaffleContext";
 import Ticket from "./Ticket";
 import { useHorizontalScroll } from "../../../../util/hooks";
 
- function Tickets() {
+function Tickets() {
   const { boughtNumbers, raffleData, clientData } = useContext(RaffleContext);
   const horizontalScroll = useHorizontalScroll();
 
@@ -14,7 +14,11 @@ import { useHorizontalScroll } from "../../../../util/hooks";
       <TicketTitle
         items={boughtNumbers.length}
         initial={{ opacity: 0, x: "100%" }}
-        animate={{ opacity: 1, x: 0, transition: { delay: 0.5, duration: 0.5 } }}
+        animate={{
+          opacity: 1,
+          x: 0,
+          transition: { delay: 0.5, duration: 0.5 },
+        }}
         exit={{ opacity: 0, x: "100%", transition: { duration: 0.5 } }}
       >
         Seu{boughtNumbers.length > 1 ? "s" : ""} Número
@@ -46,7 +50,6 @@ const TicketContainer = styled(motion.div)`
 const TicketsBox = styled(motion.div)`
   width: 100%;
   display: grid;
-
   overflow-y: hidden;
   overflow-x: scroll;
   background-color: ${({ theme }) => theme.color.white};
@@ -56,18 +59,34 @@ const TicketsBox = styled(motion.div)`
   ${({ items }) =>
     items > 2
       ? `
-   grid-template-columns: repeat(${items}, 47%);	
+      grid-template-columns: repeat(${items}, 47%);	
+      
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(${items}, 33.33%);	
+      }
+ 
    `
       : items == 2
       ? `
-   grid-template-columns: repeat(${items}, 50%);	
-    
+      grid-template-columns: repeat(2, 1fr);	
+
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+        padding-left: 20%;
+        padding-right: 20%;
+      }
   `
       : `
-    grid-template-columns: 100%;
-  padding-left:20%;
-  padding-right:20%;
-`}
+      grid-template-columns:1fr;
+      padding-left:20%;
+      padding-right:20%;
+      
+      @media (min-width: 768px) {
+        grid-template-columns:1fr;
+        padding-left:37%;
+        padding-right:35%;
+      }
+      `}
 `;
 
 const TicketTitle = styled(motion.h2)`

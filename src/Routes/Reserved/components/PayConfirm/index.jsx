@@ -39,7 +39,7 @@ function PayConfirm({ paying, setPaying, setGoToPay, goToPay }) {
     <PaymentConfirm
       variants={PayConfirmAnimation}
       initial={{ opacity: 0, transition: { duration: 0.001 } }}
-      animate={!payMessage ? goToPay ? "visible" : "hidden" : { opacity: 0 }}
+      animate={!payMessage ? (goToPay ? "visible" : "hidden") : { opacity: 0 }}
       visible={goToPay}
       exit={
         goToPay ? "hidden" : { opacity: 0, transition: { duration: 0.001 } }
@@ -97,12 +97,12 @@ const PaymentConfirm = styled(motion.div)`
 `;
 
 const PayConfirmBox = styled(motion.div)`
-  width: 80%;
+  width: 70%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 2rem;
+  padding-top: 4rem;
   color: ${({ theme }) => theme.color.black};
   font-family: "Poppins";
   background-color: ${({ theme }) => theme.color.white};
@@ -113,7 +113,7 @@ const PayConfirmBox = styled(motion.div)`
   box-shadow: 0px 0px 10px 0px ${({ theme }) => theme.color.main.medium},
     1px 1px 10px 2px rgba(0, 0, 0, 0.7);
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     width: 90%;
   }
   p {
@@ -129,7 +129,7 @@ const DontShowBox = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
   gap: 0.5rem;
   input {
     width: 1rem;

@@ -20,9 +20,11 @@ import RaffleContext from "../../../../context/RaffleContext";
 export default Title;
 
 const TitleContainer = styled(motion.h4)`
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   font-size: 2rem;
-  color: ${({ theme }) => theme.color.main.dark};
+  width: 100%;
+  color: ${({ theme }) => theme.color.white};
+  background-color: ${({ theme }) => theme.color.main.medium};
   display: flex;
   justify-content: center;
   align-items: center;

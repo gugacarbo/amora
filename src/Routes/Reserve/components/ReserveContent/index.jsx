@@ -39,7 +39,8 @@ const ReserveContainer = styled.div`
 const Title = styled(motion.h3)`
   font-size: 1.2rem;
   width: 100%;
-  padding: 0.5rem 0;
+
+  padding: 0.5rem 2rem;
   text-align: center;
   background-color: #fff;
   color: ${({ theme }) => theme.color.main.dark};

@@ -102,7 +102,7 @@ export default ({ children }) => {
 
   const openFormButtonRef = useRef(null);
 
-  const [boughtNumbers, setBoughtNumbers] = useState([2]);
+  const [boughtNumbers, setBoughtNumbers] = useState([]);
   function resetClientData() {
     setClientToken("");
 

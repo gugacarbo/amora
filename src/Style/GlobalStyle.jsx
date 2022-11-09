@@ -14,6 +14,30 @@ const GlobalStyle = createGlobalStyle`
             font-size: 13px;
         }
     }
+    @media (max-width: 1200px) {
+        html{
+            font-size: 11px;
+        }
+    }
+    @media (max-width: 960px) {
+        html{
+            font-size: 11px;
+        }
+    }
+    @media (max-width: 770px) {
+        html{
+            font-size: 11px;
+        }
+    }
+
+    @media (max-width: 400px) {
+        html{
+            font-size: 9px;
+        }
+    }
+    
+
+
     * {
         margin: 0;
         padding: 0;
@@ -21,8 +45,8 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         font-family: 'Comfortaa', 'Poppins', sans-serif;
-        background-color: ${({ theme }) => theme.color.darkGray};
-        color: ${({ theme }) => theme.color.text};
+        background-color: ${({ theme }) => theme.background};
+        color: ${({ theme }) => theme.color.black};
         overflow: hidden;
         display: flex;
         justify-content: center;
@@ -30,8 +54,8 @@ const GlobalStyle = createGlobalStyle`
         height: 100%;
         *{
 
-            &::-webkit-scrollbar {
-                width: 8px;
+        &::-webkit-scrollbar {
+            width: 8px;
             height: 8px;
         }
         &::-webkit-scrollbar-track {

@@ -25,10 +25,10 @@ function Home() {
       </Title>
       <Image />
       <Text
-        initial={{ opacity: 0.13, x: -200 }}
+        initial={{ opacity: 0.13, x: "-70vh" }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
-        exit={{ opacity: 0.13, x: -200 }}
+        exit={{ opacity: 0.13, x: "-70vh" }}
       >
         <span>Au au</span>
         <span>Meu nome é Amora Jessie e estou à procura de um lar</span>
@@ -63,7 +63,7 @@ function Home() {
       </LoginButton>
       <Instagram
         onClick={() => {
-          window.open("https://www.instagram.com/bruja.queer/");
+          window.open("https://www.instagram.com/" + import.meta.env.VITE_INSTAGRAM, "_blank");
         }}
         initial={{ opacity: 0, y: "100%" }}
         animate={{
@@ -83,7 +83,7 @@ function Home() {
         onClick={() => {
           let message = `Olá, quero de saber mais sobre a Amora!`;
           window.open(
-            "https://api.whatsapp.com/send?phone=5548988431797&text=" + message
+            "https://api.whatsapp.com/send?phone="+import.meta.env.VITE_WHATSAPP_NUMBER+"&text=" + message
           );
         }}
         initial={{ opacity: 0, y: "100%" }}
@@ -100,11 +100,45 @@ function Home() {
       >
         <WhatsappSvg />
       </Whatsapp>
+
     </HomeContainer>
   );
 }
 
+
 export default Home;
+const HomeContainer = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.background};
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 7rem 1fr auto auto 7rem;
+  grid-template-areas:
+    "HomeTitle HomeTitle"
+    "HomeText HomeImage"
+    "HomeButton HomeButton"
+    "HomeButton2 HomeButton2"
+    " login login ";
+  place-items: center;
+  overflow: hidden;
+  position: relative;
+`;
+
+const Title = styled(motion.h1)`
+  grid-area: HomeTitle;
+  font-size: 3rem;
+  font-family: "Pacifico", cursive;
+  color: ${({ theme }) => theme.color.main.color};
+  width: 100%;
+  height: 100%;
+  font-weight: 400;
+  text-align: center;
+  background-color: ${({ theme }) => theme.color.white};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Text = styled(motion.p)`
   grid-area: HomeText;
@@ -114,7 +148,7 @@ const Text = styled(motion.p)`
   align-items: center;
   flex-direction: column;
   gap: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   text-align: center;
   padding: 0 1rem;
   font-family: "Poppins";
@@ -166,6 +200,7 @@ const Button = styled(motion.div)`
 const LoginButton = styled(motion.div)`
   grid-area: login;
   a {
+    font-size: 1.1rem;
     width: 100%;
     height: 100%;
     text-decoration: none;
@@ -179,44 +214,13 @@ const LoginButton = styled(motion.div)`
     }
   }
 `;
-const HomeContainer = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  background-color: ${({ theme }) => theme.background};
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 8rem 1fr auto auto 8rem;
-  grid-template-areas:
-    "HomeTitle HomeTitle"
-    "HomeText HomeImage"
-    "HomeButton HomeButton"
-    "HomeButton2 HomeButton2"
-    " login login ";
-  place-items: center;
-  overflow: hidden;
-  position: relative;
-`;
 
-const Title = styled(motion.h1)`
-  grid-area: HomeTitle;
-  font-size: 3rem;
-  font-family: "Pacifico", cursive;
-  color: ${({ theme }) => theme.color.main.color};
-  width: 100%;
-  height: 100%;
-  font-weight: 400;
-  text-align: center;
-  background-color: ${({ theme }) => theme.color.white};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 const Whatsapp = styled(motion.div)`
   position: absolute;
   left: 4.5rem;
   bottom: 1.5rem;
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.8rem;
+  height: 1.8rem;
 
   svg {
     overflow: visible;

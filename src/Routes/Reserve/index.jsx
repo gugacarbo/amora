@@ -17,7 +17,7 @@ function Reserve() {
   if (clientData?.name == "") navigate("/rifa");
   useEffect(() => {
     if (boughtNumbers.length == 0) {
-      navigate("/");
+      navigate("/rifa");
     }
   }, [boughtNumbers]);
   return (
@@ -46,7 +46,7 @@ const ReserveContainer = styled(motion.div)`
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 10% auto auto 1fr;
+  grid-template-rows:  auto auto auto 1fr;
   place-items: center;
   overflow: hidden;
   position: relative;

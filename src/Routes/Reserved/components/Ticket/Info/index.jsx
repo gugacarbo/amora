@@ -7,6 +7,7 @@ import { ReactComponent as CoinsSvg } from "../../../../../assets/coins.svg";
 
 import RaffleContext from "../../../../../context/RaffleContext";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 function Info({
   data,
@@ -51,7 +52,8 @@ function Info({
           <span>Reservado até</span>
           <span>
             {expireTime.day}/{expireTime.month}/{expireTime.year}-
-            {expireTime.hour}:{expireTime.minute}
+            {expireTime.hour}:{expireTime.minute < 10 ? "0" : ""}
+            {expireTime.minute}
           </span>
         </ReservedTo>
       )}
@@ -113,7 +115,7 @@ const TicketInfo = styled.div`
 `;
 
 const ReservedIn = styled.div`
-  font-size: 0.8rem;
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   align-items: cemter;
@@ -124,7 +126,7 @@ const ReservedTo = styled(ReservedIn)`
   grid-column: 1/2;
 `;
 const Status = styled.div`
-  font-size: 0.9rem;
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -153,14 +155,14 @@ const Icon = styled.div`
   transition: ${({ theme }) => theme.transition.slow};
 
   small {
-    font-size: 0.8rem;
+    font-size: 1rem;
     transition: ${({ theme }) => theme.transition.slow};
   }
 `;
 
 const XIcon = styled(XSvg)`
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.7rem;
+  height: 1.7rem;
   fill: ${({ theme }) => theme.color.red};
   transition: ${({ theme }) => theme.transition.slow};
 
@@ -175,8 +177,8 @@ const XIcon = styled(XSvg)`
 `;
 
 const CoinsIcon = styled(CoinsSvg)`
-  width: 2rem;
-  height: 2rem;
+  width: 2.2rem;
+  height: 2.2rem;
   fill: ${({ theme }) => theme.color.yellowGold};
   stroke: ${({ theme }) => theme.color.yellow};
   transition: ${({ theme }) => theme.transition.slow};

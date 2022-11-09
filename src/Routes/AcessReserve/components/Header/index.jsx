@@ -11,7 +11,7 @@ function Header() {
       transition={{ duration: 0.5 }}
     >
       Acessar Bilhetes
-      <BackButton to={-1}>{`<`}</BackButton>
+      <BackButton to="/">{`<`}</BackButton>
     </HeaderContainer>
   );
 }

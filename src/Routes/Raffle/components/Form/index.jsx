@@ -48,14 +48,14 @@ function Form({ open, setOpen }) {
   const animate = {
     disabled: {
       opacity: 0.3,
-      y: "97%",
+      y: "100%",
       transition: {
         duration: 0.8,
       },
     },
     close: {
       opacity: 1,
-      y: "97%",
+      y: "100%",
       transition: {
         duration: 0.8,
       },
@@ -345,8 +345,9 @@ const MotionContainer = styled(motion.div)`
   bottom: 0;
   left: 0;
   background: ${(props) => props.theme.color.main.light};
-  border-top: 1rem solid ${(props) => props.theme.color.main.dark};
-  border-radius: 1rem 1rem 0 0;
+  border: 1px solid ${(props) => props.theme.color.main.medium};
+  border-top: 1rem solid ${(props) => props.theme.color.main.medium};
+  border-radius: 0.5rem 0.5rem 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -355,10 +356,10 @@ const MotionContainer = styled(motion.div)`
     content: "";
     border-radius: 5rem;
     position: absolute;
-    top: -0.55rem;
+    top: -0.5rem;
     width: 80%;
     height: 0.15rem;
-    background: ${(props) => props.theme.color.gray};
+    background: ${(props) => props.theme.color.lightGray};
   }
 `;
 
@@ -366,7 +367,7 @@ const StyledForm = styled(motion.form)`
   display: flex;
   flex-direction: column;
   width: 80%;
-  height: 80%;
+  height: 90%;
   justify-content: space-between;
   align-items: center;
 `;

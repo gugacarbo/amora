@@ -26,6 +26,13 @@ function Reserved() {
 
   const [paying, setPaying] = useState([]);
   const [goToPay, setGoToPay] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!raffleData?.name || !clientData?.name) {
+      navigate("/acessar");
+    }
+  }, [raffleData, clientData]);
 
   const handleSetPaying = (number) => {
     if (paying.includes(number)) {
@@ -35,7 +42,6 @@ function Reserved() {
     }
   };
 
-  const navigate = useNavigate();
 
   return (
     <ReservedContainer
@@ -46,7 +52,7 @@ function Reserved() {
       isPaying={paying.length > 0}
     >
       <Header />
-      {paying.length > 0 && ""}
+
       <PayingHeader
         showHeader={paying.length > 0}
         closeHeader={() => setPaying([])}
@@ -99,7 +105,7 @@ const ReservedContainer = styled(motion.div)`
   background-color: ${({ theme }) => theme.background};
   overflow: hidden;
   display: grid;
-  grid-template-rows: 10% auto;
+  grid-template-rows: 7rem auto;
   grid-template-columns: 1fr;
   position: relative;
   &::before {

@@ -5,7 +5,9 @@ import RaffleContext from "../../../../context/RaffleContext";
 import { motion } from "framer-motion";
 import CancelBox from "./CancelBox";
 import { ReactComponent as TicketSvg } from "../../../../assets/Ticket.svg";
+import { ReactComponent as RaffleIconSvg } from "../../../../assets/raffleIcon.svg";
 import Info from "./Info";
+import { Link } from "react-router-dom";
 
 function Ticket({ number, text, data, paying, setPaying }) {
   const { raffleData, cancelReserve } = useContext(RaffleContext);
@@ -61,6 +63,7 @@ function Ticket({ number, text, data, paying, setPaying }) {
     },
     visible: {
       x: 0,
+      height: "100%",
       opacity: [0, 1, 1],
       transition: {
         duration: 0.8,
@@ -77,17 +80,24 @@ function Ticket({ number, text, data, paying, setPaying }) {
         delay: 0,
       },
     },
+    exit: {
+      scale: 0.4,
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+      },
+    },
   };
 
   return (
     <TicketContainer
       status={getStatus()}
       variants={TicketAnimation}
-      initial="hidden"
+      initial="visible"
       animate={
         canceling == 0 ? "visible" : canceling == 1 ? "hidden" : "delete"
       }
-      exit="hidden"
+      exit="exit"
       paying={paying.length > 0 ? 1 : 0}
       ispaying={paying.includes(number) ? 1 : 0}
       onClick={() => {
@@ -98,6 +108,7 @@ function Ticket({ number, text, data, paying, setPaying }) {
     >
       <TicketContent ref={ticketRef}>
         <TicketSvg />
+        <RaffleIcon to="/rifa">Ver Rifa</RaffleIcon>
       </TicketContent>
       <Info
         data={data}
@@ -123,12 +134,15 @@ function Ticket({ number, text, data, paying, setPaying }) {
 
 const TicketContainer = styled(motion.div)`
   width: 100%;
-
+  aspect-ratio: 2;
   display: grid;
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 30% 70%;
+
   grid-template-rows: 1fr;
   place-items: center;
-  padding: 1rem;
+  padding: 0.5rem 1rem ;
+
+
   background-color: ${({ theme }) => theme.color.white};
   border-radius: 10px;
   border: 2px solid ${({ theme }) => theme.color.main.complement};
@@ -160,17 +174,35 @@ const TicketContainer = styled(motion.div)`
         `
         : `
         cursor: pointer;
-
           filter: opacity(0.8);
       `;
   }}
 `;
 const TicketContent = styled.div`
   width: 100%;
-  height: 100%;
+  aspect-ratio: 2;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem ;
+  
   svg {
     width: 100%;
     height: 100%;
+  }
+`;
+
+const RaffleIcon = styled(Link)`
+  position: absolute;
+  bottom: -1.5rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: ${({ theme }) => theme.color.main.dark};
+transition: ${({ theme }) => theme.transition.main};
+  &:hover {
+    color: ${({ theme }) => theme.color.main.complement};
   }
 `;
 
