@@ -180,6 +180,7 @@ const RaffleNumbers = styled(motion.div)`
   margin-top: auto;
   position: relative;
   border-collapse: collapse;
+  
   z-index: 10;
   
 
