@@ -131,6 +131,7 @@ export default ({ children }) => {
   function handlePayMessage(message) {
     setPayMessage(message ? true : false);
   }
+  const [showPrize, setShowPrize] = useState(false);
   return (
     <RaffleContext.Provider
       value={{
@@ -155,6 +156,8 @@ export default ({ children }) => {
         cancelReserve,
         payMessage,
         setPayMessage: handlePayMessage,
+        showPrize,
+        setShowPrize,
       }}
     >
       {children}

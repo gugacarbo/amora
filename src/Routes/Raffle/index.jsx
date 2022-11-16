@@ -10,6 +10,7 @@ import Loading from "../Loading";
 import ColorLegend from "./components/ColorLegend";
 import { ReactComponent as TicketIcon } from "../../assets/ticketIcon.svg";
 import { ReactComponent as ArrowLeftIcon } from "../../assets/arrowLeft.svg";
+import Prize from "./components/Prize";
 
 function Raffle() {
   const { raffleData, checked, openFormButtonRef, getRifa } =
@@ -127,6 +128,7 @@ function Raffle() {
         Reservar
       </Button>
       <Form open={formModalOpen} setOpen={setFormModalOpen} />
+      <Prize />
     </RaffleContainer>
   );
 }
@@ -199,11 +201,11 @@ const RaffleNumbers = styled(motion.div)`
   border-collapse: collapse;
   height: 100%;
   overflow: hidden;
-  @media (max-width: 1366px) and (min-width: 800px) {
-    overflow-y: auto;
-  }
+  overflow-y: auto;
   z-index: 10;
-
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
   ${({ items, theme }) => {
     if (items < 25) {
       return `
@@ -232,11 +234,10 @@ const RaffleNumbers = styled(motion.div)`
         max-height: 50vh;
         overflow-x:hidden;
         overflow-y:scroll;
-        background-color: ${theme.color.main.lighter};
         border-top: 2px solid ${theme.color.lighter};
         border-left: 1px solid ${theme.color.main.lighter};
         border-right: 1px solid ${theme.color.main.lighter};
-        grid-template-columns: repeat(6, 1fr);`;
+        grid-template-columns: repeat(7, 1fr);`;
     }
   }}
 `;

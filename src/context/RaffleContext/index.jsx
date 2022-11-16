@@ -20,6 +20,8 @@ const RaffleContext = createContext({
   cancelReserve: (number, clientId, raffleId) => {},
   payMessage: false,
   setPayMessage: () => {},
+  showPrize: false,
+  setShowPrize: () => {},
 });
 
 export default RaffleContext;

@@ -22,7 +22,7 @@ function ColorLegend() {
       </ColorLegendItem>
       <ColorLegendItem>
         <Color color="#bbbbbb" />
-        <ColorLegendText>Inisponível</ColorLegendText>
+        <ColorLegendText>Indisponível</ColorLegendText>
       </ColorLegendItem>
       <ColorLegendItem>
         <Color color="#0099cc" />
