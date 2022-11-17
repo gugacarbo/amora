@@ -244,7 +244,7 @@ function Form({ open, setOpen }) {
 }
 
 export default Form;
-
+/*
 const Label = styled.label`
   width: 100%;
   display: grid;
@@ -406,3 +406,4 @@ function validarCpf(input) {
   return true;
 }
 const isRepeatingNumber = (str) => /^(\d)(\1){10}$/.test(str);
+*/
