@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ReactComponent as LoadingPaws } from "../../assets/loadingPaws.svg";
+import { ReactComponent as LoadingPaws } from "../../assets/LoadingPaws.svg";
 function Loading() {
   return (
     <LoadingScreenContent>
