@@ -85,7 +85,7 @@ function Form({ open, setOpen }) {
         initial="close"
         animate={checked.length > 0 ? (open ? "open" : "close") : "disabled"}
         variants={animate}
-        isKeyboardOpen={HeightSz + maxHei * 0.1 < maxHei ? 1 : 0}
+        isKeyboardOpen={HeightSz < maxHei * 0.6 ? 1 : 0}
         ref={ref}
         exit="exit"
       >
@@ -165,13 +165,11 @@ function Form({ open, setOpen }) {
               {isSubmitting && <Loading />}
               <StyledForm onSubmit={handleSubmit}>
                 <Label>
-                  <span>
-                    Nome {HeightSz + maxHei * 0.1} -{maxHei}
-                  </span>
+                  <span>Nome</span>
                   <StyledInput
                     type="text"
                     name="name"
-                    maxLength={25}
+                    maxLength={30}
                     placeholder="Digite seu nome"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -185,7 +183,7 @@ function Form({ open, setOpen }) {
                   <span>Sobrenome</span>
                   <StyledInput
                     type="text"
-                    maxLength={25}
+                    maxLength={30}
                     name="lastName"
                     placeholder="Digite seu último nome"
                     onChange={handleChange}
