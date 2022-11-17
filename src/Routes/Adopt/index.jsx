@@ -152,6 +152,7 @@ const AdoptContent = styled(motion.div)`
   padding: 0;
   font-family: "Poppins";
   overflow-y: scroll;
+  overflow-x: hidden;
 `;
 const Row = styled.div`
   grid-column: 1/3;
