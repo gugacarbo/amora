@@ -10,7 +10,7 @@ function ErrorMessage() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (errorMessage) {
+    if (errorMessage!= "") {
       setShow(true);
       const timeout = setTimeout(() => {
         setShow(false);

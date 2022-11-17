@@ -41,6 +41,8 @@ function Raffle() {
         <Loading />
       </RaffleContainer>
     );
+
+
   var numbers = [];
 
   for (var i = 1; i <= raffleData.number_quantity; i++) {
@@ -65,78 +67,7 @@ function Raffle() {
       exit={{ pacity: 1 }}
       transition={{ delay: 0, duration: 0.5 }}
     >
-      <Title
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "-100%" }}
-        transition={{ duration: 0.5 }}
-      >
-        <BackButton to={"/"}>
-          <ArrowLeftIcon />
-          <small>Voltar</small>
-        </BackButton>
-        <ToRaffleButton to="/acessar">
-          <TicketIcon />
-          <small>Meus Bilhetes</small>
-        </ToRaffleButton>
-        Rifa da Amora
-      </Title>
-      <RaffleHeader
-        initial={{ x: "100%" }}
-        animate={{ x: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        exit={{ x: "100%" }}
-      >
-        {checked.length === 0 ? (
-          <HeaderMessage>
-            Selecione os números que deseja reservar
-          </HeaderMessage>
-        ) : (
-          <>
-            <CheckedNumbersShow>
-              {checked.length !== 0 && (
-                // <p>{checked.sort((a, b) => a - b).join(", ")}</p>
-                <p>
-                  {checked.length} Número{checked.length > 1 ? "s" : ""}
-                </p>
-              )}
-            </CheckedNumbersShow>
-            <Total>
-              Valor Total R${" "}
-              {(checked.length * raffleData.number_price)
-                .toFixed(2)
-                .replace(".", ",")}
-            </Total>
-          </>
-        )}
-      </RaffleHeader>
-
-      <RaffleNumbers
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-        exit={{ opacity: 0 }}
-        items={numbers.length}
-      >
-        {numbers.map((number) => {
-          return number;
-        })}
-      </RaffleNumbers>
-      <Legend />
-      <ColorLegend />
-      <Button
-        ref={openFormButtonRef}
-        onClick={() => setFormModalOpen((x) => !x)}
-        disabled={checked.length === 0}
-        initial={{ y: "200%", opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.3 }}
-        exit={{ y: "200%", opacity: 0 }}
-      >
-        Reservar
-      </Button>
-      <Form open={formModalOpen} setOpen={setFormModalOpen} />
-      <Prize />
+     
     </RaffleContainer>
   );
 }
