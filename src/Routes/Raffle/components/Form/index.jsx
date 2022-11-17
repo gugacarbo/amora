@@ -7,7 +7,6 @@ import { useDetectClickOutside } from "react-detect-click-outside";
 import RaffleContext from "../../../../context/RaffleContext";
 import { motion } from "framer-motion";
 import Loading from "../../../Loading";
-import useDetectKeyboardOpen from "use-detect-keyboard-open";
 
 function Form({ open, setOpen }) {
   const {
@@ -31,7 +30,7 @@ function Form({ open, setOpen }) {
     setErrorMessage,
   } = useContext(RaffleContext);
 
-  const isKeyboardOpen = useDetectKeyboardOpen();
+  const isKeyboardOpen = 1;
 
   const navigate = useNavigate();
   const ref = useDetectClickOutside({ onTriggered: handleCloseForm });
