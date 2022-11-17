@@ -25,6 +25,8 @@ const AppContent = styled.div`
   height: 100%;
   position: relative;
   background-color: ${({ theme }) => theme.background};
+  overflow: hidden;
+
 `;
 const AppContainer = styled(Div100vh)`
   //background-color: ${({ theme }) => theme.background};

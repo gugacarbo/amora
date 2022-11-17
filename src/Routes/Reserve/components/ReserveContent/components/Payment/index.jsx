@@ -20,6 +20,29 @@ function Payment() {
     raffleData?.number_price ?? 0
   );
 
+  let pixKey = import.meta.env.VITE_PIX_KEY;
+
+  switch (import.meta.env.VITE_PIX_KEY_TYPE) {
+    case "CPF":
+      pixKey = import.meta.env.VITE_PIX_KEY.replace(
+        /^(\d{3})(\d{3})(\d{3})(\d{2}).*/,
+        "$1.$2.$3-$4"
+      );
+      break;
+    case "TELEFONE":
+      pixKey = import.meta.env.VITE_PIX_KEY.replace(
+        /^(\d{2})(\d{1})(\d{4})(\d{4}).*/,
+        "($1) $2 $3-$4"
+      );
+      break;
+    case "CNPJ":
+      pixKey = import.meta.env.VITE_PIX_KEY.replace(
+        /^(\d{2})(\d{3})(\d{4})(\d{2}).*/,
+        "$1.$2/$3-$4"
+      );
+      break;
+  }
+
   return (
     <>
       <PaymentContainer
@@ -45,9 +68,9 @@ function Payment() {
               .toFixed(2)
               .replace(".", ",")}
           </span>
-          <span>Beneficiário: Nicole Mascarenhas</span>
-          <span>Chave: (48) 9.8843-1797</span>
-          <span>Instituição: NU PAGAMENTOS</span>
+          <span>Beneficiário: {import.meta.env.VITE_PIX_NAME}</span>
+          <span>Chave: {pixKey}</span>
+          <span>Instituição: {import.meta.env.VITE_PIX_BANK}</span>
         </PixReceiverData>
         <PixCodeInput
           pixCode={pixCode}

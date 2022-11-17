@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { useContext, useEffect } from "react";
-import Div100vh from "react-div-100vh";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./components/Header";
@@ -9,6 +8,8 @@ import api from "../../util/api";
 import { useState } from "react";
 import Loading from "../Loading";
 import Form from "./components/Form";
+import Error from "./components/Error";
+
 function AcessReserve() {
   const {
     setClientData,
@@ -18,8 +19,10 @@ function AcessReserve() {
     setClientToken,
   } = useContext(RaffleContext);
 
-  const [IsAutenting, setIsAutenting] = useState(0);
+  const [IsAutenting, setIsAutenting] = useState(1);
   const navigate = useNavigate();
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (clientToken != "" && clientToken != null) {
@@ -35,13 +38,16 @@ function AcessReserve() {
             navigate("/reservados");
           } else {
             setIsAutenting(0);
+            setClientToken("");
           }
         })
         .catch((err) => {
           setIsAutenting(0);
+          setClientToken("");
         });
     } else {
       setIsAutenting(0);
+      setClientToken("");
     }
   }, [clientToken]);
 
@@ -55,8 +61,10 @@ function AcessReserve() {
       {IsAutenting == 1 && <Loading />}
       {IsAutenting == 0 && (
         <>
+
           <Header />
-          <Form />
+          <Error error={errorMessage} setError={setErrorMessage} />
+          <Form errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
         </>
       )}
     </AcessReserveContainer>

@@ -11,15 +11,24 @@ import ColorLegend from "./components/ColorLegend";
 import { ReactComponent as TicketIcon } from "../../assets/ticketIcon.svg";
 import { ReactComponent as ArrowLeftIcon } from "../../assets/arrowLeft.svg";
 import Prize from "./components/Prize";
+import Error from "../Error";
 
 function Raffle() {
   const { raffleData, checked, openFormButtonRef, getRifa } =
     useContext(RaffleContext);
   const [formModalOpen, setFormModalOpen] = useState(false);
 
-  useEffect(() => {
-    getRifa();
-  }, []);
+  if (raffleData.error)
+    return (
+      <RaffleContainer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ delay: 0, duration: 0.5 }}
+      >
+        <Error />
+      </RaffleContainer>
+    );
 
   if (!raffleData?.name)
     return (
@@ -32,7 +41,6 @@ function Raffle() {
         <Loading />
       </RaffleContainer>
     );
-
   var numbers = [];
 
   for (var i = 1; i <= raffleData.number_quantity; i++) {

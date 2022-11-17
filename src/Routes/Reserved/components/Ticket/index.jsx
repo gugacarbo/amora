@@ -140,6 +140,7 @@ const TicketContainer = styled(motion.div)`
 
   grid-template-rows: 1fr;
   place-items: center;
+  max-height: 15rem;
   padding: 0.5rem 1rem ;
 
 

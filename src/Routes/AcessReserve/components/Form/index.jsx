@@ -8,11 +8,8 @@ import api from "../../../../util/api";
 import RaffleContext from "../../../../context/RaffleContext";
 import { motion } from "framer-motion";
 import Loading from "../../../Loading";
-import Error from "../Error";
 
-function Form() {
-  const [errorMessage, setErrorMessage] = useState("");
-
+function Form({ setErrorMessage }) {
   const {
     raffleData,
     setRaffleData,
@@ -37,8 +34,6 @@ function Form() {
 
   return (
     <>
-      <Error error={errorMessage} setError={setErrorMessage} />
-
       <MotionContainer
         initial={{ opacity: 0, y: "100%" }}
         animate={{
@@ -98,6 +93,7 @@ function Form() {
               })
               .catch((err) => {
                 resetClientData();
+                setErrorMessage("Ocorreu um erro, tente novamente mais tarde");
               })
               .finally(() => {
                 setSubmitting(false);

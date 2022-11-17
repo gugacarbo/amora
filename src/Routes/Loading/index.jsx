@@ -1,11 +1,10 @@
-import Div100vh from "react-div-100vh";
 import styled from "styled-components";
 import { ReactComponent as LoadingPaws } from "../../assets/LoadingPaws.svg";
 function Loading() {
   return (
-    <LoadingScreenmContent>
+    <LoadingScreenContent>
       <LoadginIcon />
-    </LoadingScreenmContent>
+    </LoadingScreenContent>
   );
 }
 
@@ -57,8 +56,7 @@ const LoadginIcon = styled(LoadingPaws)`
   }
 `;
 
-// const LoadingScreenmContent = styled(Div100vh)`
-const LoadingScreenmContent = styled.div`
+const LoadingScreenContent = styled.div`
   display: flex;
   width: 100%;
   height: 100%;

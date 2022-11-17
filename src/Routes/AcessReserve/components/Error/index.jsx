@@ -55,6 +55,7 @@ const ErrorBox = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 5;
   p {
     display: flex;
     align-items: center;

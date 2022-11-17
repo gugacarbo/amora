@@ -9,13 +9,32 @@ export default ({ children }) => {
   const [clientNumbers, setClientNumbers] = useState({});
 
   function getRifa() {
-    api.get("/getRifa.php").then(({ data }) => {
-      setRaffleData(data.data);
-    });
+    api
+      .get("/getRifa.php")
+      .then(({ data }) => {
+        if (data.status == 200) {
+          setRaffleData(data.data);
+        } else {
+          setRaffleData({ error: data.status });
+        }
+      })
+      .catch((e) => {
+        setRaffleData({ error: e.code });
+      });
   }
+
   useEffect(() => {
     getRifa();
   }, []);
+
+  useEffect(() => {
+    if (raffleData.error) {
+      const timer = setTimeout(() => {
+        getRifa();
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [raffleData]);
 
   function handleChecked(number) {
     if (checked.includes(number)) {
@@ -92,11 +111,6 @@ export default ({ children }) => {
         cpf: "",
         phone: "",
       });
-      // setClientData({
-      //   name: "Gustavo",
-      //   cpf: "011.894.469-01",
-      //   phone: "(49) 9.9960-6003",
-      // });
     }
   }, []);
 
@@ -131,6 +145,7 @@ export default ({ children }) => {
   function handlePayMessage(message) {
     setPayMessage(message ? true : false);
   }
+
   const [showPrize, setShowPrize] = useState(false);
   return (
     <RaffleContext.Provider
