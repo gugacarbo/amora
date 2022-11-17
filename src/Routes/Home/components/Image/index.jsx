@@ -21,7 +21,7 @@ function Image() {
 }
 const ImageContainer = styled(motion.div)`
   grid-area: HomeImage;
-  width: 80%;
+  width: 90%;
   max-height: 100%;
   background-color: ${({ theme }) => theme.background};
   position: relative;
