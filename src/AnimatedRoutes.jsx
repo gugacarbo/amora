@@ -14,7 +14,7 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
-        <Route path="/rifa" element={<Raffle />} />
+        <Route path="/rifa" element={<div>Teste</div>} />
         <Route path="/rifa/reserva" element={<Reserve />} />
         <Route path="/Reservados" element={<Reserved />} />
         <Route path="/acessar" element={<AcessReserve />} />
