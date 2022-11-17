@@ -14,7 +14,7 @@ function Prize() {
       onClick={() => setShowPrize(false)}
     >
       <ImageContainer>
-        <img src={raffleData.prize.img} />
+        <img src={raffleData?.prize?.img} />
       </ImageContainer>
     </PrizeContainer>
   );
