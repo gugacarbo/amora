@@ -32,8 +32,8 @@ function Form({ open, setOpen }) {
     setErrorMessage,
   } = useContext(RaffleContext);
 
-  /*
   const isKeyboardOpen = useDetectKeyboardOpen();
+  /*
 
   const navigate = useNavigate();
   const ref = useDetectClickOutside({ onTriggered: handleCloseForm });
