@@ -4,13 +4,11 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import { useDetectClickOutside } from "react-detect-click-outside";
-import api from "../../../../util/api";
 import RaffleContext from "../../../../context/RaffleContext";
 import { motion } from "framer-motion";
 import Loading from "../../../Loading";
 import useDetectKeyboardOpen from "use-detect-keyboard-open";
-import { useEffect } from "react";
-
+import ErrorMessage from "../../../ErrorMessage"
 function Form({ open, setOpen }) {
   const {
     raffleData,
@@ -22,6 +20,7 @@ function Form({ open, setOpen }) {
     setClientToken,
     reserveNumbers,
     resetChecked,
+    getRifa,
     removeChecked,
     clientNumbers,
     setClientNumbers,
@@ -41,13 +40,6 @@ function Form({ open, setOpen }) {
     setOpen(false);
   }
 
-  function handleErrorMessage(message) {
-    setErrorMessage(message);
-    const timeout = setTimeout(() => {
-      setErrorMessage("");
-    }, 5000);
-    return () => clearTimeout(timeout);
-  }
   if (clientData == null) return <></>;
 
   const animate = {
@@ -95,14 +87,7 @@ function Form({ open, setOpen }) {
   };
   return (
     <>
-      <ErrorMessage
-        initial="hidden"
-        animate={errorMessage ? "visible" : "hidden"}
-        variants={ErrorAnimations}
-      >
-        {errorMessage && <p>{errorMessage}</p>}
-      </ErrorMessage>
-
+      <ErrorMessage/>
       <MotionContainer
         initial="close"
         animate={checked.length > 0 ? (open ? "open" : "close") : "disabled"}
@@ -160,13 +145,16 @@ function Form({ open, setOpen }) {
                     removeChecked(response.data.invalid);
                   }
 
-                  handleErrorMessage(response.data.message);
+                  setErrorMessage(response.data.message);
                 }
               })
+              .catch(() => {
+                setErrorMessage(
+                  "Um Erro Aconteceu, Tente Novamente Mais Tarde"
+                );
+              })
               .finally(() => {
-                api.get("/getRifa.php").then(({ data }) => {
-                  setRaffleData(data.data);
-                });
+                getRifa();
                 setSubmitting(false);
               });
           }}
@@ -271,29 +259,7 @@ function Form({ open, setOpen }) {
 
 export default Form;
 
-const ErrorMessage = styled(motion.div)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2rem;
-  background: ${({ theme }) => theme.color.white + "dd"};
-  border-bottom: 1rem solid ${({ theme }) => theme.color.main.dark};
-  padding: 5rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  p {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    width: 90%;
-    text-align: center;
-    font-size: 1.25rem;
-  }
-`;
+
 
 const Label = styled.label`
   width: 100%;
