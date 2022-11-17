@@ -35,6 +35,7 @@ function Form({ open, setOpen }) {
 
   const navigate = useNavigate();
   const ref = useDetectClickOutside({ onTriggered: handleCloseForm });
+  
   function handleCloseForm(e) {
     if (e.target === openFormButtonRef.current) return;
     setOpen(false);
