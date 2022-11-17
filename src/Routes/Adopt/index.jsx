@@ -7,6 +7,7 @@ import AmoraImg4 from "../../assets/Amora4.jfif";
 import AmoraImg5 from "../../assets/Amora5.jpeg";
 import { ReactComponent as ArrowLeftIcon } from "../../assets/arrowLeft.svg";
 import Contact from "./Contact";
+import Galery from "./Galery";
 function Adopt() {
   const navigate = useNavigate();
 
@@ -43,35 +44,31 @@ function Adopt() {
             Fui encontrada no dia 30/10/2022 nas imediações do Armazém Vieira,
             na Costeira, muito assustada e correndo entre os carros e motos,
             quase fui atropelada, mas por sorte me resgataram!
+            <small>
+              Alguns dizem que fui deixada ali por volta do dia 27/10/2022.
+            </small>
           </p>
         </Row>
-        <Row></Row>
         <Row>
           <Image>
             <img src={AmoraImg1} alt="" />
           </Image>
           <span>
             <small>
-              Alguns dizem que fui deixada ali por volta do dia 27/10/2022.
-            </small>
-            <small>
               Dois tios me encontraram e me deram ração e água. Outros tios me
-              ajudaram nos dias seguintes, me acolhendo para eu não ficar na
-              rua sozinha.
+              ajudaram nos dias seguintes, me acolhendo para eu não ficar na rua
+              sozinha.
             </small>
           </span>
         </Row>
         <Row>
-          <span>
+          <p>
             <small>
-              Agora estou numa hospedagem social e estou procurando alguém
-              para dar muito amor e carinho.
+              Agora estou numa hospedagem social e estou procurando alguém para
+              dar muito amor e carinho.
             </small>
             <small>Adoro abraçar humanos!</small>
-          </span>
-          <Image>
-            <img src={AmoraImg4} alt="" />
-          </Image>
+          </p>
         </Row>
         <Row>
           <p>
@@ -81,27 +78,27 @@ function Adopt() {
           </p>
         </Row>
         <Row>
+          <span>
+            <small>
+              Sou muito inteligente e aprendo bem rápido! Não faço muito barulho
+              ou bagunça.
+            </small>
+            <small>
+              Não tenho vermes, pulgas ou carrapatos, já fui vacinada e estou na
+              fila de castração.
+            </small>
+          </span>
           <Image>
             <img src={AmoraImg5} alt="" />
           </Image>
-          <span>
-            <small>
-              Sou muito inteligente e aprendo bem rápido! Não faço muito
-              barulho ou bagunça.
-            </small>
-            <small>
-              Não tenho vermes, pulgas ou carrapatos, já fui vacinada e estou na fila de
-              castração.
-            </small>
-            <small>
-              <b>
-
-              Estou a procura de um tutor ou um lar temporário
-              </b>
-            </small>
-          </span>
         </Row>
-          <Contact />
+        <Row>
+          <small>
+            <b>Estou a procura de um tutor ou um lar temporário</b>
+          </small>
+        </Row>
+        <Galery />
+        <Contact />
       </AdoptContent>
     </AdoptContainer>
   );
@@ -121,7 +118,6 @@ const AdoptContainer = styled(motion.div)`
   place-items: center;
   overflow: hidden;
   position: relative;
-  overflow-y: scroll;
 `;
 
 const Title = styled(motion.h1)`
@@ -144,26 +140,24 @@ const AdoptContent = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto;
   grid-template-rows: auto;
 
-  gap: 0.5rem;
+  row-gap: 1rem;
   font-size: 1.3rem;
   text-align: center;
   padding: 0;
   font-family: "Poppins";
   overflow-y: scroll;
-
-  
 `;
 const Row = styled.div`
   grid-column: 1/3;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0.5rem 0;
+
   h3 {
-    margin: 1rem 0;
+    margin: 1rem;
     font-size: 2rem;
   }
   small,
@@ -172,6 +166,7 @@ const Row = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 90%;
     font-size: 1.2rem;
     margin: 0.5rem auto;
@@ -180,7 +175,6 @@ const Row = styled.div`
   }
   span {
     width: 50%;
-    flex-direction: column;
     font-size: 1.2rem;
     small {
       text-align: center;
@@ -190,16 +184,16 @@ const Row = styled.div`
     }
   }
 `;
-const Space = styled(Row)`
-`;
+const Space = styled(Row)``;
 
 const Image = styled.div`
   width: 40%;
   margin: auto;
   overflow: hidden;
+  aspect-ratio: 1;
+  border-radius: 50%;
   img {
     width: 100%;
-    height: 100%;
   }
 `;
 
