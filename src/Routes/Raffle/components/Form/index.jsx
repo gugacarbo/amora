@@ -12,9 +12,6 @@ import useDetectKeyboardOpen from "use-detect-keyboard-open";
 import { useEffect } from "react";
 
 function Form({ open, setOpen }) {
-  const isKeyboardOpen = useDetectKeyboardOpen();
-
-  const [errorMessage, setErrorMessage] = useState("");
   const {
     raffleData,
     setRaffleData,
@@ -31,7 +28,11 @@ function Form({ open, setOpen }) {
     openFormButtonRef,
     boughtNumbers,
     setBoughtNumbers,
+    errorMessage,
+    setErrorMessage,
   } = useContext(RaffleContext);
+
+  const isKeyboardOpen = useDetectKeyboardOpen();
 
   const navigate = useNavigate();
   const ref = useDetectClickOutside({ onTriggered: handleCloseForm });
