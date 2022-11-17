@@ -6,6 +6,7 @@ import AmoraImg1 from "../../../assets/adoptImages/Amora1.jpeg";
 import AmoraImg2 from "../../../assets/adoptImages/Amora2.jpeg";
 import AmoraImg4 from "../../../assets/adoptImages/Amora4.jfif";
 import AmoraImg5 from "../../../assets/adoptImages/Amora5.jpeg";
+import AmoraImg6 from "../../../assets/adoptImages/Amora6.jpeg";
 
 function Galery() {
   const images = [
@@ -30,6 +31,11 @@ function Galery() {
       originalHeight: "100%",
       thumbnail: AmoraImg5,
     },
+    {
+      original: AmoraImg6,
+      originalHeight: "100%",
+      thumbnail: AmoraImg6,
+    },
   ];
 
   return (
@@ -41,7 +47,7 @@ function Galery() {
 
 const GaleryContainer = styled.div`
   grid-column: 1/3;
-  width: 80%;
+  width: 85%;
   height: 100%;
   margin: 0 auto;
 `;

@@ -26,13 +26,28 @@ const GlobalStyle = createGlobalStyle`
     }
     @media (max-width: 770px) {
         html{
-            font-size: 11px;
+            font-size: 12px;
+        }
+    }
+    @media (max-width: 500px) {
+        html{
+            font-size: 12px;
         }
     }
 
     @media (max-width: 400px) {
         html{
+            font-size: 10px;
+        }
+    }
+    @media (max-width: 320px) {
+        html{
             font-size: 9px;
+        }
+    }
+    @media (max-width: 280px) {
+        html{
+            font-size: 8px;
         }
     }
     
@@ -55,15 +70,17 @@ const GlobalStyle = createGlobalStyle`
         *{
 
         &::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+            width: .6rem;
+            height: .6rem;
         }
         &::-webkit-scrollbar-track {
             background: transparent;
+    background: ${({ theme }) => theme.color.main.lighter};
+
         }
         &::-webkit-scrollbar-thumb {
             border-radius: 20px;
-            background-color: ${({ theme }) => theme.color.main.color};
+            background-color: ${({ theme }) => theme.color.main.medium};
            
         }
         &::-webkit-scrollbar-thumb:hover {

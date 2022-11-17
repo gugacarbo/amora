@@ -118,6 +118,9 @@ const AdoptContainer = styled(motion.div)`
   place-items: center;
   overflow: hidden;
   position: relative;
+  &::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.color.main.color};
+  }
 `;
 
 const Title = styled(motion.h1)`
@@ -182,6 +185,11 @@ const Row = styled.div`
 
       margin: 0.5rem;
     }
+  }
+  b {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0.5rem 0;
   }
 `;
 const Space = styled(Row)``;
