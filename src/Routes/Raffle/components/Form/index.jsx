@@ -32,6 +32,7 @@ function Form({ open, setOpen }) {
     setErrorMessage,
   } = useContext(RaffleContext);
 
+  /*
   const isKeyboardOpen = useDetectKeyboardOpen();
 
   const navigate = useNavigate();
@@ -41,7 +42,6 @@ function Form({ open, setOpen }) {
     if (e.target === openFormButtonRef?.current) return;
     setOpen(false);
   }
-
   const animate = {
     disabled: {
       opacity: 0.3,
@@ -71,7 +71,7 @@ function Form({ open, setOpen }) {
       },
     },
   };
-
+*/
   return (
     <>
       {/* <MotionContainer
