@@ -6,6 +6,7 @@ import Raffle from "./Routes/Raffle";
 import Reserve from "./Routes/Reserve";
 import AcessReserve from "./Routes/AcessReserve";
 import Reserved from "./Routes/Reserved";
+import Adopt from "./Routes/Adopt";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -16,8 +17,9 @@ function AnimatedRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/rifa" element={<Raffle />} />
         <Route path="/rifa/reserva" element={<Reserve />} />
-        <Route path="/Reservados" element={<Reserved />} />
+        <Route path="/reservados" element={<Reserved />} />
         <Route path="/acessar" element={<AcessReserve />} />
+        <Route path="/adote" element={<Adopt />} />
       </Routes>
     </AnimatePresence>
   );

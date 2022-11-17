@@ -40,7 +40,7 @@ function Contact() {
       </Reserves>
       <Whatsapp
         onClick={() => {
-          let message = `Olá, quero de saber mais sobre a Amora!`;
+          let message = `Olá, quero saber mais sobre a Amora!`;
           window.open(
             "https://api.whatsapp.com/send?phone=" +
               import.meta.env.VITE_WHATSAPP_NUMBER +

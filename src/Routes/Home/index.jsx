@@ -50,9 +50,9 @@ function Home() {
         transition={{ delay: 0.4, duration: 0.5 }}
         exit={{ x: "300%", opacity: 0 }}
         second
-        onClick={() => navigate("/rifa")}
+        onClick={() => navigate("/adote")}
       >
-        Me dê um lar
+        Ajude a Amora
       </Button>
       <LoginButton
         initial={{ y: "100vh" }}
@@ -64,7 +64,10 @@ function Home() {
       </LoginButton>
       <Instagram
         onClick={() => {
-          window.open("https://www.instagram.com/" + import.meta.env.VITE_INSTAGRAM, "_blank");
+          window.open(
+            "https://www.instagram.com/" + import.meta.env.VITE_INSTAGRAM,
+            "_blank"
+          );
         }}
         initial={{ opacity: 0, y: "100%" }}
         animate={{
@@ -82,9 +85,12 @@ function Home() {
       </Instagram>
       <Whatsapp
         onClick={() => {
-          let message = `Olá, quero de saber mais sobre a Amora!`;
+          let message = `Olá, quero saber mais sobre a Amora!`;
           window.open(
-            "https://api.whatsapp.com/send?phone="+import.meta.env.VITE_WHATSAPP_NUMBER+"&text=" + message
+            "https://api.whatsapp.com/send?phone=" +
+              import.meta.env.VITE_WHATSAPP_NUMBER +
+              "&text=" +
+              message
           );
         }}
         initial={{ opacity: 0, y: "100%" }}
@@ -101,11 +107,9 @@ function Home() {
       >
         <WhatsappSvg />
       </Whatsapp>
-
     </HomeContainer>
   );
 }
-
 
 export default Home;
 const HomeContainer = styled(motion.div)`

@@ -85,7 +85,7 @@ function Form({ open, setOpen }) {
         initial="close"
         animate={checked.length > 0 ? (open ? "open" : "close") : "disabled"}
         variants={animate}
-        isKeyboardOpen={HeightSz < maxHei * 0.6 ? 1 : 0}
+        isKeyboardOpen={HeightSz < maxHei * 0.8 ? 1 : 0}
         ref={ref}
         exit="exit"
       >
@@ -261,7 +261,7 @@ const MotionContainer = styled(motion.div)`
     return isKeyboardOpen == 1
       ? `
       
-      height: 100%;
+      height: 95%;
       
       `
       : `
