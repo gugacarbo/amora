@@ -5,7 +5,10 @@ import styled from "styled-components";
 import Image from "./components/Image";
 import { ReactComponent as WhatsappSvg } from "../../assets/whatsapp.svg";
 import { ReactComponent as InstagramSvg } from "../../assets/instagram.svg";
+import useDetectKeyboardOpen from "use-detect-keyboard-open";
+
 function Home() {
+  const isKeyboardOpen = useDetectKeyboardOpen();
   const navigate = useNavigate();
 
   return (

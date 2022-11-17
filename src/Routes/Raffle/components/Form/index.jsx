@@ -3,7 +3,6 @@ import InputMask from "react-input-mask";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
-import useDetectKeyboardOpen from "use-detect-keyboard-open";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import { motion } from "framer-motion";
 
@@ -32,7 +31,6 @@ function Form({ open, setOpen }) {
     setErrorMessage,
   } = useContext(RaffleContext);
 
-  const isKeyboardOpen = useDetectKeyboardOpen();
   /*
 
   const navigate = useNavigate();
