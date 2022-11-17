@@ -6,7 +6,6 @@ import { Formik } from "formik";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import RaffleContext from "../../../../context/RaffleContext";
 import { motion } from "framer-motion";
-import Loading from "../../../Loading";
 import useDetectKeyboardOpen from "use-detect-keyboard-open";
 
 function Form({ open, setOpen }) {
@@ -94,7 +93,158 @@ function Form({ open, setOpen }) {
       ref={ref}
       exit="exit"
     >
-     
+      <Formik
+        initialValues={clientData}
+        validate={(values) => {
+          const errors = {};
+          if (!values.name) {
+            errors.name = "Digite Seu Nome";
+          }
+
+          if (!values.lastName) {
+            errors.lastName = "Digite Seu último nome";
+          }
+
+          const cpf = values.cpf.replace(/\D/g, "");
+
+          if (!cpf) {
+            errors.cpf = "Digite Seu CPF";
+          }
+          if (cpf.length < 11) {
+          } else if (!validarCpf(values.cpf)) {
+            errors.cpf = "CPF Inválido";
+          }
+
+          const phone = values.phone.replace(/\D/g, "");
+          if (!phone || phone.length < 11) {
+            errors.phone = "Digite Seu Telefone";
+          }
+
+          return errors;
+        }}
+        onSubmit={(clientData, { setSubmitting, setValues }) => {
+          reserveNumbers(clientData)
+            .then((response) => {
+              if (response.data.status >= 200 && response.data.status < 300) {
+                setClientData(response.data.client);
+                setClientNumbers(response.data.client_numbers);
+                setClientToken(response.data.token);
+                setValues(response.data.client);
+                resetChecked();
+                setBoughtNumbers(response.data.numbers);
+                navigate("/rifa/reserva");
+              } else {
+                if (response?.data?.used) {
+                  removeChecked(response.data.used);
+                }
+
+                if (response?.data?.invalid) {
+                  removeChecked(response.data.invalid);
+                }
+
+                setErrorMessage(response.data.message);
+              }
+            })
+            .catch(() => {
+              setErrorMessage("Um Erro Aconteceu, Tente Novamente Mais Tarde");
+            })
+            .finally(() => {
+              getRifa();
+              setSubmitting(false);
+            });
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+          /* and other goodies */
+        }) => (
+          <>
+            {isSubmitting && <div></div>}
+            <StyledForm onSubmit={handleSubmit}>
+              <Label>
+                <span>Nome</span>
+                <StyledInput
+                  type="text"
+                  name="name"
+                  maxLength={25}
+                  placeholder="Digite seu nome"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.name}
+                  error={errors.name && touched.name && errors.name}
+                />
+                <small>{errors.name && touched.name && errors.name}</small>
+              </Label>
+
+              <Label>
+                <span>Sobrenome</span>
+                <StyledInput
+                  type="text"
+                  maxLength={25}
+                  name="lastName"
+                  placeholder="Digite seu último nome"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.lastName}
+                  error={errors.lastName && touched.lastName && errors.lastName}
+                />
+                <small>
+                  {errors.lastName && touched.lastName && errors.lastName}
+                </small>
+              </Label>
+              <Label>
+                <span>CPF</span>
+                <StyledInput
+                  as={InputMask}
+                  mask="999.999.999-99"
+                  maskChar={null}
+                  alwaysShowMask={false}
+                  type="text"
+                  name="cpf"
+                  placeholder="Digite seu CPF"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.cpf}
+                  error={errors.cpf && touched.cpf && errors.cpf}
+                />
+                <small>{errors.cpf && touched.cpf && errors.cpf}</small>
+              </Label>
+              <Label>
+                <span>Telefone</span>
+                <StyledInput
+                  as={InputMask}
+                  alwaysShowMask={false}
+                  maskChar={null}
+                  mask="(99) 9.9999-9999"
+                  type="text"
+                  name="phone"
+                  placeholder="Digite seu telefone"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.phone}
+                  error={errors.phone && touched.phone && errors.phone}
+                />
+                <small>{errors.phone && touched.phone && errors.phone}</small>
+              </Label>
+
+              {checked.length > 0 && (
+                <Button
+                  onClick={handleSubmit}
+                  disabled={isSubmitting || Object.keys(errors).length > 0}
+                >
+                  Reservar
+                </Button>
+              )}
+            </StyledForm>
+          </>
+        )}
+      </Formik>
     </MotionContainer>
   );
 }
