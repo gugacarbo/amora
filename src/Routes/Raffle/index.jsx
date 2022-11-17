@@ -137,6 +137,7 @@ function Raffle() {
       >
         Reservar
       </Button>
+      <Form open={formModalOpen} setOpen={setFormModalOpen} />
       <Prize />
     </RaffleContainer>
   );
