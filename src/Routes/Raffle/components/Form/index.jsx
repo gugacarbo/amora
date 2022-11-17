@@ -74,7 +74,7 @@ function Form({ open, setOpen }) {
 
   return (
     <>
-      <MotionContainer
+      {/* <MotionContainer
         initial="close"
         animate={checked.length > 0 ? (open ? "open" : "close") : "disabled"}
         variants={animate}
@@ -153,7 +153,7 @@ function Form({ open, setOpen }) {
             handleBlur,
             handleSubmit,
             isSubmitting,
-            /* and other goodies */
+            
           }) => (
             <>
               {isSubmitting && <Loading />}
@@ -238,7 +238,7 @@ function Form({ open, setOpen }) {
             </>
           )}
         </Formik>
-      </MotionContainer>
+                </MotionContainer>*/}
     </>
   );
 }
