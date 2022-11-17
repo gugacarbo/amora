@@ -12,7 +12,7 @@ function App() {
         <Router>
           <AnimatedRoutes />
         </Router>
-        <LandscapeChecker />
+        {/* <LandscapeChecker /> */}
       </AppContent>
     </AppContainer>
   );
