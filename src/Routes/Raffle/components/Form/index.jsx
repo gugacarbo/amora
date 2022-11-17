@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import InputMask from "react-input-mask";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import { useDetectClickOutside } from "react-detect-click-outside";
@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 
 import Loading from "../../../Loading";
 import RaffleContext from "../../../../context/RaffleContext";
+import { use100vh } from "react-div-100vh";
 
 function Form({ open, setOpen }) {
   const {
@@ -31,10 +32,18 @@ function Form({ open, setOpen }) {
     setErrorMessage,
   } = useContext(RaffleContext);
 
-  /*
-
   const navigate = useNavigate();
+
   const ref = useDetectClickOutside({ onTriggered: handleCloseForm });
+
+  const [maxHei, setMaxHei] = useState(0);
+  const HeightSz = use100vh();
+
+  useEffect(() => {
+    if (HeightSz > maxHei) {
+      setMaxHei(HeightSz);
+    }
+  }, [HeightSz]);
 
   function handleCloseForm(e) {
     if (e.target === openFormButtonRef?.current) return;
@@ -69,14 +78,14 @@ function Form({ open, setOpen }) {
       },
     },
   };
-*/
+  if (clientData?.name == null) return <></>;
   return (
     <>
-      {/* <MotionContainer
+      <MotionContainer
         initial="close"
         animate={checked.length > 0 ? (open ? "open" : "close") : "disabled"}
         variants={animate}
-        isKeyboardOpen={isKeyboardOpen && true}
+        isKeyboardOpen={HeightSz + maxHei * 0.1 < maxHei ? 1 : 0}
         ref={ref}
         exit="exit"
       >
@@ -151,13 +160,14 @@ function Form({ open, setOpen }) {
             handleBlur,
             handleSubmit,
             isSubmitting,
-            
           }) => (
             <>
               {isSubmitting && <Loading />}
               <StyledForm onSubmit={handleSubmit}>
                 <Label>
-                  <span>Nome</span>
+                  <span>
+                    Nome {HeightSz + maxHei * 0.1} -{maxHei}
+                  </span>
                   <StyledInput
                     type="text"
                     name="name"
@@ -236,13 +246,61 @@ function Form({ open, setOpen }) {
             </>
           )}
         </Formik>
-                </MotionContainer>*/}
+      </MotionContainer>
     </>
   );
 }
 
 export default Form;
-/*
+
+const MotionContainer = styled(motion.div)`
+  width: 100%;
+  transition: 0.3s;
+  height: 60vh;
+
+  ${({ isKeyboardOpen }) => {
+    console.log(isKeyboardOpen);
+    return isKeyboardOpen == 1
+      ? `
+      
+      height: 100%;
+      
+      `
+      : `
+    
+    `;
+  }}
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: ${(props) => props.theme.color.main.light};
+  border: 1px solid ${(props) => props.theme.color.main.medium};
+  border-top: 1rem solid ${(props) => props.theme.color.main.medium};
+  border-radius: 0.5rem 0.5rem 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 15;
+  &::before {
+    content: "";
+    border-radius: 5rem;
+    position: absolute;
+    top: -0.5rem;
+    width: 80%;
+    height: 0.15rem;
+    background: ${(props) => props.theme.color.lightGray};
+  }
+`;
+
+const StyledForm = styled(motion.form)`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 90%;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const Label = styled.label`
   width: 100%;
   display: grid;
@@ -292,49 +350,6 @@ const StyledInput = styled.input`
     `}
 `;
 
-const MotionContainer = styled(motion.div)`
-  width: 100%;
-  transition: 0.3s;
-
-  ${({ isKeyboardOpen }) =>
-    isKeyboardOpen
-      ? `
-      height: 100%;
-    
-  `
-      : `
-      height: 60vh;
-  `};
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: ${(props) => props.theme.color.main.light};
-  border: 1px solid ${(props) => props.theme.color.main.medium};
-  border-top: 1rem solid ${(props) => props.theme.color.main.medium};
-  border-radius: 0.5rem 0.5rem 0 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 15;
-  &::before {
-    content: "";
-    border-radius: 5rem;
-    position: absolute;
-    top: -0.5rem;
-    width: 80%;
-    height: 0.15rem;
-    background: ${(props) => props.theme.color.lightGray};
-  }
-`;
-
-const StyledForm = styled(motion.form)`
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  height: 90%;
-  justify-content: space-between;
-  align-items: center;
-`;
 const Button = styled(motion.div)`
   background-color: ${({ theme }) => theme.color.main.complement};
 
@@ -404,4 +419,3 @@ function validarCpf(input) {
   return true;
 }
 const isRepeatingNumber = (str) => /^(\d)(\1){10}$/.test(str);
-*/
