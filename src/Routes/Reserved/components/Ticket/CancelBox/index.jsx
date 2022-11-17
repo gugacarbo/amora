@@ -4,7 +4,7 @@ import styled from "styled-components";
 import RaffleContext from "../../../../../context/RaffleContext";
 
 function CancelBox({ number, raffleId, clientId, setCanceling, setConfirm }) {
-  const { raffleData, cancelReserve, setClientNumbers } =
+  const { raffleData, cancelReserve, setClientNumbers, setErrorMessage} =
     useContext(RaffleContext);
 
   return (
@@ -30,10 +30,12 @@ function CancelBox({ number, raffleId, clientId, setCanceling, setConfirm }) {
                 } else {
                   setCanceling(0);
                   setConfirm(false);
+                  setErrorMessage("Ocorreu um Erro, Tente Novamente Mais Tarde")
                 }
                 return data;
               })
               .catch((e) => {
+                setErrorMessage("Ocorreu um Erro, Tente Novamente Mais Tarde")
                 setCanceling(0);
                 setConfirm(false);
               });

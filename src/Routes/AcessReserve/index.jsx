@@ -8,7 +8,7 @@ import api from "../../util/api";
 import { useState } from "react";
 import Loading from "../Loading";
 import Form from "./components/Form";
-import Error from "./components/Error";
+import Error from "../../Routes/ErrorMessage";
 
 function AcessReserve() {
   const {
@@ -17,12 +17,13 @@ function AcessReserve() {
     clientData,
     clientToken,
     setClientToken,
+    errorMessage,
+    setErrorMessage
   } = useContext(RaffleContext);
 
   const [IsAutenting, setIsAutenting] = useState(1);
   const navigate = useNavigate();
 
-  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (clientToken != "" && clientToken != null) {

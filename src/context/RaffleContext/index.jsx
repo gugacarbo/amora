@@ -22,6 +22,8 @@ const RaffleContext = createContext({
   setPayMessage: () => {},
   showPrize: false,
   setShowPrize: () => {},
+  errorMessage: "",
+  setErrorMessage: () => {},
 });
 
 export default RaffleContext;

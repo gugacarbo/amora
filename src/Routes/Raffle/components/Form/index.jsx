@@ -8,8 +8,12 @@ import api from "../../../../util/api";
 import RaffleContext from "../../../../context/RaffleContext";
 import { motion } from "framer-motion";
 import Loading from "../../../Loading";
+import useDetectKeyboardOpen from "use-detect-keyboard-open";
+import { useEffect } from "react";
 
 function Form({ open, setOpen }) {
+  const isKeyboardOpen = useDetectKeyboardOpen();
+
   const [errorMessage, setErrorMessage] = useState("");
   const {
     raffleData,
@@ -102,6 +106,7 @@ function Form({ open, setOpen }) {
         initial="close"
         animate={checked.length > 0 ? (open ? "open" : "close") : "disabled"}
         variants={animate}
+        isKeyboardOpen={isKeyboardOpen && true}
         ref={ref}
         exit="exit"
       >
@@ -192,7 +197,7 @@ function Form({ open, setOpen }) {
                   />
                   <small>{errors.name && touched.name && errors.name}</small>
                 </Label>
-                
+
                 <Label>
                   <span>Sobrenome</span>
                   <StyledInput
@@ -340,7 +345,17 @@ const StyledInput = styled.input`
 
 const MotionContainer = styled(motion.div)`
   width: 100%;
-  height: 60vh;
+  transition: 0.3s;
+
+  ${({ isKeyboardOpen }) =>
+    isKeyboardOpen
+      ? `
+      height: 100%;
+    
+  `
+      : `
+      height: 60vh;
+  `};
   position: absolute;
   bottom: 0;
   left: 0;

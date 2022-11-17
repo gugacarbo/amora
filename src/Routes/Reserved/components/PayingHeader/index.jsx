@@ -62,8 +62,8 @@ const PayingHeaderBox = styled(motion.div)`
   z-index: 20;
 
   background: ${({ theme }) => theme.color.white + "ef"};
-  border-bottom: 0.5rem solid ${({ theme }) => theme.color.green};
-  padding: 2rem 0.5rem;
+  border-bottom: 0.8rem solid ${({ theme }) => theme.color.green};
+  padding: 2.5rem 0.5rem;
   padding-bottom: 0;
   display: grid;
   font-size: 1.2rem;

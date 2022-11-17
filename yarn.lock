@@ -1493,6 +1493,11 @@ update-browserslist-db@^1.0.9:
     escalade "^3.1.1"
     picocolors "^1.0.0"
 
+use-detect-keyboard-open@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/use-detect-keyboard-open/-/use-detect-keyboard-open-0.2.0.tgz#fd2bb9c0871e0cb3e66f0185c8e40c2e2910f5b3"
+  integrity sha512-tW1MHQ5rKFshz0xxcUSdTrLoXPH5VG+X671wQerW7rgMZbp0b9YcTxnq3a8oOT5urxWS3C2TckOYs7LGOp6CiA==
+
 vite-plugin-svgr@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/vite-plugin-svgr/-/vite-plugin-svgr-2.2.2.tgz#c5c9cb573bf455bb079550531847ddc5d2e122af"

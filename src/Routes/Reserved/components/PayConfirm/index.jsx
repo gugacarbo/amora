@@ -13,22 +13,17 @@ function PayConfirm({ paying, setPaying, setGoToPay, goToPay }) {
 
   const PayConfirmAnimation = {
     hidden: {
-      backgroundColor: [
-        "rgba(0, 0, 0, 0.5)",
-        "rgba(0, 0, 0, 0.0)",
-        "rgba(0, 0, 0, 0)",
-      ],
-      scale: [1, 1, 0.5],
-      opacity: [1, 1, 0],
+      backgroundColor: "rgba(0, 0, 0, 0)",
+      borderRadius: "10rem",
+      scale: 0.5,
+      opacity: 0,
     },
     visible: {
-      backgroundColor: [
-        "rgba(0, 0, 0, 0.0)",
-        "rgba(0, 0, 0, 0.0)",
-        "rgba(0, 0, 0, 0.5)",
-      ],
-      scale: [1, 1, 1],
-      opacity: [0, 1, 1],
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+    borderRadius: "0rem",
+
+      scale: 1,
+      opacity: 1,
       transition: {
         duration: 0.5,
       },

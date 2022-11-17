@@ -52,36 +52,25 @@ function Ticket({ number, text, data, paying, setPaying }) {
   }, [confirm]);
 
   const TicketAnimation = {
-    hidden: {
-      x: ["0vw", "100vw", "100vw"],
-      opacity: [1, 0, 0],
-      height: ["8rem", "5rem", "3rem"],
-      transition: {
-        duration: 0.5,
-        ease: "easeInOut",
-      },
-    },
     visible: {
       x: 0,
-      height: "100%",
-      opacity: [0, 1, 1],
+      opacity: 1,
       transition: {
         duration: 0.8,
         ease: "easeInOut",
       },
     },
     delete: {
-      x: ["100vw", "100vw", "100vw"],
-      opacity: [1, 0, 0],
-      height: ["5rem", "0rem", "0rem"],
-      padding: ["0.5rem", "0rem", "0rem"],
+      x: "100vw",
+      opacity: 0,
+      maxHeight: "0rem",
+      padding: "0rem",
       transition: {
         duration: 0.2,
         delay: 0,
       },
     },
     exit: {
-      scale: 0.4,
       opacity: 0,
       transition: {
         duration: 0.2,
@@ -94,9 +83,7 @@ function Ticket({ number, text, data, paying, setPaying }) {
       status={getStatus()}
       variants={TicketAnimation}
       initial="visible"
-      animate={
-        canceling == 0 ? "visible" : canceling == 1 ? "hidden" : "delete"
-      }
+      animate={canceling == 0 ? "visible" : "delete"}
       exit="exit"
       paying={paying.length > 0 ? 1 : 0}
       ispaying={paying.includes(number) ? 1 : 0}
@@ -141,8 +128,7 @@ const TicketContainer = styled(motion.div)`
   grid-template-rows: 1fr;
   place-items: center;
   max-height: 15rem;
-  padding: 0.5rem 1rem ;
-
+  padding: 0.5rem 1rem;
 
   background-color: ${({ theme }) => theme.color.white};
   border-radius: 10px;
@@ -187,8 +173,8 @@ const TicketContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1.5rem ;
-  
+  margin-bottom: 1.5rem;
+
   svg {
     width: 100%;
     height: 100%;
@@ -201,7 +187,7 @@ const RaffleIcon = styled(Link)`
   font-size: 0.9rem;
   text-decoration: none;
   color: ${({ theme }) => theme.color.main.dark};
-transition: ${({ theme }) => theme.transition.main};
+  transition: ${({ theme }) => theme.transition.main};
   &:hover {
     color: ${({ theme }) => theme.color.main.complement};
   }

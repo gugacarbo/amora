@@ -1,3 +1,4 @@
+import ErrorMessage from "./Routes/ErrorMessage"
 import Div100vh from "react-div-100vh";
 import { BrowserRouter as Router } from "react-router-dom";
 import styled from "styled-components";
@@ -12,6 +13,7 @@ function App() {
         <Router>
           <AnimatedRoutes />
         </Router>
+        <ErrorMessage />
         {/* <LandscapeChecker /> */}
       </AppContent>
     </AppContainer>
@@ -26,7 +28,6 @@ const AppContent = styled.div`
   position: relative;
   background-color: ${({ theme }) => theme.background};
   overflow: hidden;
-
 `;
 const AppContainer = styled(Div100vh)`
   //background-color: ${({ theme }) => theme.background};

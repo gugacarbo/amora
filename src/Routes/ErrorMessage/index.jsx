@@ -1,21 +1,24 @@
 import { motion } from "framer-motion";
+import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
+import RaffleContext from "../../context/RaffleContext";
 
-function Error({ error, setError }) {
+function ErrorMessage() {
+  const { errorMessage, setErrorMessage } = useContext(RaffleContext);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (error) {
+    if (errorMessage) {
       setShow(true);
       const timeout = setTimeout(() => {
         setShow(false);
-        setError("");
+        setErrorMessage("");
       }, 3000);
       return () => clearTimeout(timeout);
     }
-  }, [error]);
+  }, [errorMessage]);
 
   const ErrorAnimations = {
     hidden: {
@@ -36,12 +39,12 @@ function Error({ error, setError }) {
       animate={show ? "visible" : "hidden"}
       variants={ErrorAnimations}
     >
-      {error && <p>{error}</p>}
+      {errorMessage && <p>{errorMessage}</p>}
     </ErrorBox>
   );
 }
 
-export default Error;
+export default ErrorMessage;
 
 const ErrorBox = styled(motion.div)`
   position: absolute;
