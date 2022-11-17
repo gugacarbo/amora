@@ -3,13 +3,13 @@ import InputMask from "react-input-mask";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
-import { useDetectClickOutside } from "react-detect-click-outside";
-import api from "../../../../util/api";
-import RaffleContext from "../../../../context/RaffleContext";
-import { motion } from "framer-motion";
-import Loading from "../../../Loading";
 import useDetectKeyboardOpen from "use-detect-keyboard-open";
-import { useEffect } from "react";
+import { useDetectClickOutside } from "react-detect-click-outside";
+import { motion } from "framer-motion";
+
+import Loading from "../../../Loading";
+import RaffleContext from "../../../../context/RaffleContext";
+
 function Form({ open, setOpen }) {
   const {
     raffleData,
@@ -36,12 +36,11 @@ function Form({ open, setOpen }) {
 
   const navigate = useNavigate();
   const ref = useDetectClickOutside({ onTriggered: handleCloseForm });
+
   function handleCloseForm(e) {
-    if (e.target === openFormButtonRef.current) return;
+    if (e.target === openFormButtonRef?.current) return;
     setOpen(false);
   }
-
-  
 
   const animate = {
     disabled: {
@@ -73,19 +72,6 @@ function Form({ open, setOpen }) {
     },
   };
 
-  const ErrorAnimations = {
-    hidden: {
-      opacity: 1,
-      y: "-100%",
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
   return (
     <>
       <MotionContainer
@@ -258,8 +244,6 @@ function Form({ open, setOpen }) {
 }
 
 export default Form;
-
-
 
 const Label = styled.label`
   width: 100%;
