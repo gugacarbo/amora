@@ -247,7 +247,7 @@ const RaffleNumbers = styled(motion.div)`
         border-top: 2px solid ${theme.color.lighter};
         border-left: 1px solid ${theme.color.main.lighter};
         border-right: 1px solid ${theme.color.main.lighter};
-        grid-template-columns: repeat(7, 1fr);`;
+        grid-template-columns: repeat(6, 1fr);`;
     }
   }}
 `;
