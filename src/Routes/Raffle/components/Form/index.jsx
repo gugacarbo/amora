@@ -6,6 +6,7 @@ import { Formik } from "formik";
 import { useDetectClickOutside } from "react-detect-click-outside";
 import RaffleContext from "../../../../context/RaffleContext";
 import { motion } from "framer-motion";
+import Loading from "../../../Loading";
 import useDetectKeyboardOpen from "use-detect-keyboard-open";
 
 function Form({ open, setOpen }) {
@@ -89,7 +90,7 @@ function Form({ open, setOpen }) {
       initial="close"
       animate={checked.length > 0 ? (open ? "open" : "close") : "disabled"}
       variants={animate}
-      isKeyboardOpen={isKeyboardOpen && true}
+      isKeyboardOpen={isKeyboardOpen ? 1 : 0}
       ref={ref}
       exit="exit"
     >
@@ -165,7 +166,7 @@ function Form({ open, setOpen }) {
           /* and other goodies */
         }) => (
           <>
-            {isSubmitting && <div></div>}
+            {isSubmitting && <Loading />}
             <StyledForm onSubmit={handleSubmit}>
               <Label>
                 <span>Nome</span>
