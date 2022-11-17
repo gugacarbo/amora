@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
-import { Router, Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import RaffleContext from "../../context/RaffleContext";
 import Form from "./components/Form";

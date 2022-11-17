@@ -1,4 +1,4 @@
-import ErrorMessage from "./Routes/ErrorMessage"
+import ErrorMessage from "./Routes/ErrorMessage";
 import Div100vh from "react-div-100vh";
 import { BrowserRouter as Router } from "react-router-dom";
 import styled from "styled-components";
@@ -10,10 +10,10 @@ function App() {
   return (
     <AppContainer>
       <AppContent>
+        <ErrorMessage />
         <Router>
           <AnimatedRoutes />
         </Router>
-        <ErrorMessage />
         {/* <LandscapeChecker /> */}
       </AppContent>
     </AppContainer>
