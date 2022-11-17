@@ -68,7 +68,7 @@ const LoadingScreenContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.background + "bb"};
+
   cursor: none;
 `;
 
