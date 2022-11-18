@@ -23,7 +23,7 @@ function Info({
   var D = new Date(data.reserveTime * 1000);
   const date = {
     day: D.getDate(),
-    month: D.getMonth(),
+    month: D.getMonth() + 1,
     year: D.getFullYear(),
     hour: D.getHours(),
     minute: D.getMinutes(),
@@ -32,7 +32,7 @@ function Info({
   var ET = new Date(data.reserveTime * 1000 + raffleData.reserveTimeout * 1000);
   const expireTime = {
     day: ET.getDate(),
-    month: ET.getMonth(),
+    month: ET.getMonth() + 1,
     year: ET.getFullYear(),
     hour: ET.getHours(),
     minute: ET.getMinutes(),

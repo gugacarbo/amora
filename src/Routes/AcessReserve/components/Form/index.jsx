@@ -9,7 +9,7 @@ import RaffleContext from "../../../../context/RaffleContext";
 import { motion } from "framer-motion";
 import Loading from "../../../Loading";
 
-function Form({ setErrorMessage }) {
+function Form() {
   const {
     raffleData,
     setRaffleData,
@@ -26,6 +26,7 @@ function Form({ setErrorMessage }) {
     boughtNumbers,
     setBoughtNumbers,
     resetClientData,
+    setErrorMessage
   } = useContext(RaffleContext);
 
   const navigate = useNavigate();

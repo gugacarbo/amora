@@ -3,44 +3,26 @@ import { motion } from "framer-motion";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useRef, useState } from "react";
 
-import RaffleContext from "../../context/RaffleContext";
-
 import Header from "./components/Header";
 import Ticket from "./components/Ticket";
-import PayingHeader from "./components/PayingHeader";
-import PayConfirm from "./components/PayConfirm";
-
-import { ReactComponent as TicketSvg } from "../../assets/ticketIcon.svg";
+import ListHeader from "./components/ListHeader";
+import api from "../util/api";
 
 function Reserved() {
-  const {
-    setClientData,
-    clientNumbers,
-    setClientNumbers,
-    clientData,
-    clientToken,
-    setClientToken,
-    raffleData,
-    setBoughtNumbers,
-    payMessage,
-    setPayMessage,
-  } = useContext(RaffleContext);
+  const [numbers, setNumbers] = useState([]);
+  const [raffleData, setRaffleData] = useState({});
 
-  const [paying, setPaying] = useState([]);
-  const [goToPay, setGoToPay] = useState(false);
-  const navigate = useNavigate();
-
-  const handleSetPaying = (number) => {
-    if (paying.includes(number)) {
-      setPaying(paying.filter((item) => item != number));
-    } else {
-      setPaying([...paying, number]);
-    }
-  };
-
-  if (!raffleData?.name || !clientData?.name) {
-    return <Navigate to="/acessar" />;
+  function getRifa(){
+    api.get("/numbers.php").then(({ data }) => {
+      if (data.status == 200) {
+        setNumbers(data.data.number_array);
+        setRaffleData(data.data);
+      }
+    });
   }
+  useEffect(() => {
+    getRifa()
+  }, []);
 
   return (
     <ReservedContainer
@@ -48,61 +30,25 @@ function Reserved() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ delay: 0.4, duration: 0.5 }}
-      isPaying={paying.length > 0}
     >
       <Header />
 
-      <PayingHeader
-        showHeader={paying.length > 0}
-        closeHeader={() => setPaying([])}
-        paying={paying}
-      />
-      {Object.keys(clientNumbers).length > 0 ? (
-        <TicketsContainer>
-          {Object.keys(clientNumbers).map((number) => (
-            <Ticket
-              key={number}
-              number={number}
-              data={clientNumbers[number]}
-              text={"Prêmio: " + raffleData.prize.name.slice(0, 20)}
-              paying={paying}
-              setPaying={handleSetPaying}
-            />
-          ))}
-        </TicketsContainer>
-      ) : (
-        <NoTickets>
-          <span>Voce ainda não reservou nenhum número da rifa</span>
-          <Link to="/rifa">
-            <TicketSvg />
-            <span>Confira os Números Disponíveis</span>
-          </Link>
-        </NoTickets>
-      )}
-      <PayButton
-        initial={{ y: "200%" }}
-        animate={paying.length > 0 ? { y: 0 } : { y: "200%" }}
-        exit={{ y: "200%" }}
-        transition={{ duration: 0.5 }}
-        onClick={() => {
-          if (payMessage) {
-            setBoughtNumbers(paying.sort((a, b) => a - b));
-            navigate("/rifa/reserva");
-          } else {
-            setGoToPay(true);
-          }
-        }}
-      >
-        Pagar
-      </PayButton>
-      <PayConfirm
-        goToPay={goToPay}
-        setGoToPay={setGoToPay}
-        paying={paying}
-        setPaying={setPaying}
-        setBoughtNumbers={setBoughtNumbers}
-        setPayMessage={setPayMessage}
-      />
+      <TicketsContainer>
+        <ListHeader pos={0} title="Aguardando Pagamento" color="yellowGold" />
+        <ListHeader pos={2} title="Expirados!" color="red" />
+        <ListHeader pos={4} title="Pagos" color="green" />
+        {Object.keys(numbers).map((number) => (
+          <Ticket
+            key={number}
+            number={number}
+            data={numbers[number]}
+            raffleId={raffleData.id}
+            raffleTimeout={raffleData.reserveTimeout}
+            text={""}
+            refresh={getRifa}
+          />
+        ))}
+      </TicketsContainer>
     </ReservedContainer>
   );
 }
@@ -150,7 +96,7 @@ const TicketsContainer = styled.div`
   align-items: center;
   overflow: hidden;
   overflow-y: auto;
-  padding: 3rem 1rem;
+  padding: 1rem;
   gap: 1rem;
   display: flex;
   flex-direction: column;

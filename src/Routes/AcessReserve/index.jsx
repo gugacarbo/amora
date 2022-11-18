@@ -17,13 +17,11 @@ function AcessReserve() {
     clientData,
     clientToken,
     setClientToken,
-    errorMessage,
-    setErrorMessage
+    setErrorMessage,
   } = useContext(RaffleContext);
 
   const [IsAutenting, setIsAutenting] = useState(1);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     if (clientToken != "" && clientToken != null) {
@@ -62,10 +60,9 @@ function AcessReserve() {
       {IsAutenting == 1 && <Loading />}
       {IsAutenting == 0 && (
         <>
-
           <Header />
-          <Error error={errorMessage} setError={setErrorMessage} />
-          <Form errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
+          <Error />
+          <Form />
         </>
       )}
     </AcessReserveContainer>
