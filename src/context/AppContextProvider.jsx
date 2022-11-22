@@ -5,7 +5,7 @@ import api from "../util/api";
 
 function AppContextProvider({ children }) {
   useEffect(() => {
-    api.get("/verifyVisitor.php").then((e) => console.log(e));
+    api.get("/verifyVisitor.php")
   }, []);
   return (
     <StyleProvider>
