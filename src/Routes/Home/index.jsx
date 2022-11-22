@@ -9,6 +9,7 @@ import { ReactComponent as InstagramSvg } from "../../assets/instagram.svg";
 function Home() {
   const navigate = useNavigate();
 
+ 
   return (
     <HomeContainer
       initial={{ opacity: 1 }}

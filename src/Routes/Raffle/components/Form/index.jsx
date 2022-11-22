@@ -257,7 +257,6 @@ const MotionContainer = styled(motion.div)`
   height: 60vh;
 
   ${({ isKeyboardOpen }) => {
-    console.log(isKeyboardOpen);
     return isKeyboardOpen == 1
       ? `
       
