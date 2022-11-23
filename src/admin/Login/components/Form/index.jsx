@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import { motion } from "framer-motion";
-
+import api from "../../../util/api";
+import AdminContext from "../../../context/AdminContext";
 function Form() {
+  const navigate = useNavigate();
+
+  const { token, setToken } = useContext(AdminContext);
   return (
     <MotionContainer
       initial={{ opacity: 0, y: "100%" }}
@@ -23,24 +27,38 @@ function Form() {
           user: "",
           password: "",
         }}
+        enableReinitialize={true}
         validate={(values) => {
           const errors = {};
 
-          const user = values.user.replace(/\D/g, "");
+          //const user = values.user.replace(/\D/g, "");
 
-          if (!user) {
+          if (!values.user) {
             errors.user = "Digite Seu Usuário";
           }
 
-          const password = values.password.replace(/\D/g, "");
-
-          if (!password) {
+          if (!values.password) {
             errors.password = "Digite Seu Senha";
           }
 
           return errors;
         }}
-        onSubmit={({ user, password }, { setSubmitting, setValues }) => {}}
+        onSubmit={({ user, password }, { setSubmitting, setValues }) => {
+          api
+            .post("/login.php", { user, password })
+            .then(({ data }) => {
+              if (data.status == 200 && data?.token) {
+                setToken(data.token);
+                navigate("/admin/tickets");
+              } else {
+                alert(data.message);
+              }
+            })
+            .catch((e) => {
+              alert("Um erro Aconteceu");
+            });
+          setSubmitting(false);
+        }}
       >
         {({
           values,
@@ -53,7 +71,6 @@ function Form() {
           /* and other goodies */
         }) => (
           <>
-            {isSubmitting && <Loading />}
             <StyledForm onSubmit={handleSubmit}>
               <Label>
                 <span>Usuário</span>
@@ -71,7 +88,7 @@ function Form() {
               <Label>
                 <span>Senha</span>
                 <StyledInput
-                  type="text"
+                  type="password"
                   name="password"
                   placeholder="Senha"
                   onChange={handleChange}

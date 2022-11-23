@@ -9,6 +9,7 @@ import Reserved from "./Routes/Reserved";
 import Adopt from "./Routes/Adopt";
 
 import Login from "./admin/Login";
+import Logout from "./admin/Logout";
 import Tickets from "./admin/Tickets";
 
 function AnimatedRoutes() {
@@ -24,6 +25,7 @@ function AnimatedRoutes() {
         <Route path="acessar" element={<AcessReserve />} />
         <Route path="adote" element={<Adopt />} />
         <Route path="admin" element={<Login />} />
+        <Route path="admin/logout" element={<Logout />} />
         <Route
           path="admin/tickets"
           element={

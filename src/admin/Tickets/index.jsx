@@ -8,11 +8,13 @@ import Ticket from "./components/Ticket";
 import ListHeader from "./components/ListHeader";
 import api from "../util/api";
 
+import AdminContext from "../context/AdminContext";
+
 function Reserved() {
   const [numbers, setNumbers] = useState([]);
   const [raffleData, setRaffleData] = useState({});
-
-  function getRifa(){
+  const { token } = useContext(AdminContext);
+  function getRifa() {
     api.get("/numbers.php").then(({ data }) => {
       if (data.status == 200) {
         setNumbers(data.data.number_array);
@@ -21,8 +23,8 @@ function Reserved() {
     });
   }
   useEffect(() => {
-    getRifa()
-  }, []);
+    getRifa();
+  }, [token]);
 
   return (
     <ReservedContainer

@@ -19,7 +19,7 @@ function Header() {
         <HomeSvg />
         <small>Início</small>
       </BackButton>
-      <LogoutButton onClick={resetClientData} to={"/acessar"}>
+      <LogoutButton onClick={resetClientData} to={"/admin/logout"}>
         <LogoutSvg />
         <small>Sair</small>
       </LogoutButton>
