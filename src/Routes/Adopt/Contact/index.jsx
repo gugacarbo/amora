@@ -46,7 +46,7 @@ function Contact() {
             <WhatsappSvg />
           </IconBox>
           <b>Marco</b>
-          <span>(48) 9 8843-1797</span>
+          <span>(48) 9 9125-9548</span>
         </Number>
         <Number
           onClick={() => {
